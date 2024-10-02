@@ -30,4 +30,8 @@ Route::get('/theme', function () {
     ]);
 })->name('theme');
 
+Route::get('/profile', function() {
+    return Inertia::render('Profile');
+})->name('profile');
+
 require __DIR__.'/auth.php';
