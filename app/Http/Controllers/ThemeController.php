@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{Theme, Category, User};
-use App\Http\Middleware\IsAdmin;
+use App\Http\Requests\StoreThemeRequest;
+use App\Http\Requests\UpdateThemeRequest;
 use Auth;
 
 class ThemeController extends Controller
@@ -14,7 +15,8 @@ class ThemeController extends Controller
      */
     public function index()
     {
-        //
+        $themes = Theme::with('category', 'user')->get();
+        return response()->json($themes);
     }
 
     /**
@@ -22,7 +24,7 @@ class ThemeController extends Controller
      */
     public function create()
     {
-        //
+        return view('themes.create');
     }
 
     /**
@@ -30,7 +32,14 @@ class ThemeController extends Controller
      */
     public function store(StoreThemeRequest $request)
     {
-        //
+        $theme = Theme::create([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'user_id' => Auth::id(),
+            'category_id' => $request->input('category_id'),
+        ]);
+
+        return response()->json($theme, 201);
     }
 
     /**
@@ -38,7 +47,7 @@ class ThemeController extends Controller
      */
     public function show(Theme $theme)
     {
-        //
+        return response()->json($theme->load('user', 'category'));
     }
 
     /**
@@ -46,7 +55,7 @@ class ThemeController extends Controller
      */
     public function edit(Theme $theme)
     {
-        //
+        return view('themes.edit', compact('theme'));
     }
 
     /**
@@ -54,7 +63,9 @@ class ThemeController extends Controller
      */
     public function update(UpdateThemeRequest $request, Theme $theme)
     {
-        //
+        $theme->update($request->validated());
+
+        return response()->json($theme);
     }
 
     /**
@@ -62,6 +73,8 @@ class ThemeController extends Controller
      */
     public function destroy(Theme $theme)
     {
-        //
+        $theme->delete();
+        
+        return response()->json(['message' => 'Theme deleted successfully']);
     }
 }
