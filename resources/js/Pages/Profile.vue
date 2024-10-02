@@ -1,6 +1,7 @@
 <script setup>
     import Header from '@/Components/Header.vue';
     import { Head } from '@inertiajs/vue3';
+    import ProfileInfo from '@/Components/ProfileInfo.vue';
 </script>
 
 <template>
@@ -8,9 +9,8 @@
 
     <Header />
 
-    <div class="max-w-6xl h-auto p-5 mx-auto my-0 bg-white shadow-md mt-10">
-        <div class="profileInfo">
-            <img src="/@/public/img/avatar_default.jpg" alt="Аватарка" class="profileInfo__avatar">
-        </div>
+    <div class="max-w-6xl h-auto p-5 mx-auto my-0 bg-white shadow-lg mt-10">
+        <ProfileInfo />
+        <hr class="border border-red-400">
     </div>
 </template>
