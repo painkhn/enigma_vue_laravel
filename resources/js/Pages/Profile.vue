@@ -7,9 +7,11 @@
     import { ref } from 'vue';
 
     const themesIsVisible = ref(true);
+
     const openThemes = () => {
         themesIsVisible.value = !themesIsVisible.value
     }
+    
 </script>
 
 <template>
