@@ -16,7 +16,7 @@
             <hr class="border-gray-400 opacity-80 mb-2">
             <p class="profileInfo__info-email mb-2">{{ $page.props.auth.user.email }}</p>
             <p class="profileInfo__info-age mb-2">{{ $page.props.auth.user.age }} лет</p>
-            <p class="profileInfo__info-sex mb-2">Man</p>
+            <p class="profileInfo__info-sex mb-2">{{ $page.props.auth.user.sex }}</p>
             <Link href="/theme/create" class="transition-all hover:text-red-400 font-semibold">Создать тему</Link>
         </div>
     </div>
