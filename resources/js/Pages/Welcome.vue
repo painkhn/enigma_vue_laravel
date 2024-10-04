@@ -3,6 +3,8 @@ import { Head, Link } from '@inertiajs/vue3';
 import PageLogo from '@/Components/PageLogo.vue'
 import HeaderSearch from '@/Components/HeaderSearch.vue'
 import MainPageContent from '@/Components/MainPageContent.vue'
+import GuestWelcome from '@/Components/GuestWelcome.vue'
+import Footer from '@/Components/Footer.vue'
 
 defineProps({
     canLogin: {
@@ -31,6 +33,7 @@ function handleImageError() {
 
 <template>
     <Head title="Главная страница" />
+
     <div class="text-black/50 dark:bg-black dark:text-white/50">
         <div
             class="relative flex min-h-screen flex-col items-center selection:bg-[#f87171] selection:text-white"
@@ -72,17 +75,12 @@ function handleImageError() {
                 </header>
 
                 <main class="mt-6">
-                    <MainPageContent v-if="$page.props.auth.user" />
-                    <div v-else class="max-w-6xl w-full h-auto p-5 mx-auto my-0 text-center">
-                        <p class="text-red-400 font-bold">Войдите в аккант, чтобы пользоваться форумом</p>
-                    </div>
+                    <MainPageContent v-if="$page.props.auth.user" />                    
+
+                    <GuestWelcome v-else />
                 </main>
 
-                <footer
-                    class="absolute bottom-5 w-full left-0 text-center pointer-events-none"
-                >
-                    InnovationSoft™ 2024. Все права защищены.
-                </footer>
+                <Footer />
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import Footer from '@/Components/Footer.vue'
 
 defineProps({
     canResetPassword: {
@@ -96,5 +97,7 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+        
+        <Footer />
     </GuestLayout>
 </template>

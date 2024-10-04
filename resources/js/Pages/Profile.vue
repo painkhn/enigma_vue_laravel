@@ -4,6 +4,7 @@
     import ProfileInfo from '@/Components/ProfileInfo.vue';
     import ProfileThemes from '@/Components/ProfileThemes.vue';
     import ProfileComments from '@/Components/ProfileComments.vue';
+    import Footer from '@/Components/Footer.vue'
     import { ref } from 'vue';
 
     const themesIsVisible = ref(true);
@@ -31,4 +32,6 @@
         <ProfileComments v-else />
         
     </div>
+
+    <Footer />
 </template>

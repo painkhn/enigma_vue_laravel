@@ -1,5 +1,6 @@
 <script setup>
     import Header from '@/Components/Header.vue';
+    import Footer from '@/Components/Footer.vue'
     import ThemeCommentList from '@/Components/ThemeCommentList.vue';
     import { Head, Link } from '@inertiajs/vue3';
 
@@ -38,4 +39,6 @@
             </div>
         </div>
     </main>
+
+    <Footer />
 </template>
