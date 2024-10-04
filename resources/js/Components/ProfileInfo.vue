@@ -1,8 +1,18 @@
+<script setup>
+    import { Link } from '@inertiajs/vue3'
+</script>
+
 <template>
     <div class="profileInfo flex gap-5">
         <img src="../../../public/img/avatar_default.jpg" alt="Аватарка" class="profileInfo__avatar max-w-40">
         <div class="profileInfo__info w-full">
-            <h3 class="profileinfo__info-username uppercase text-red-400 font-bold mb-2">username</h3>
+            <div class="flex items-center justify-between">
+                <h3 class="profileinfo__info-username uppercase text-red-400 font-bold mb-2">username</h3>
+                <div class="flex gap-5 items-center">
+                    <Link href="/profile/edit" class="mb-2 text-gray-600 transition-all hover:text-red-400">Редактировать</Link>
+                    <Link href="/logout" class="mb-2 text-gray-600 transition-all hover:text-red-400">Выйти (!!! надо настроить)</Link>
+                </div>
+            </div>
             <hr class="border-gray-400 opacity-80 mb-2">
             <p class="profileInfo__info-email mb-2">username@gmail.com</p>
             <p class="profileInfo__info-age mb-2">18 years</p>
