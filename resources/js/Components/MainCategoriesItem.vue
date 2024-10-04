@@ -6,7 +6,7 @@
         <li><a href="#!" class="transition-all hover:text-red-400">Категория</a></li>
         <li><a href="#!" class="transition-all hover:text-red-400">Категория</a></li>
         <li v-if="$page.props.auth.user && $page.props.auth.user.is_admin == 1">
-            <input type="text" class="h-6 w-4/6 px-2 trantision-all focus:ring-red-400 focus:border-red-400 rounded text-sm">
+            <input type="text" class="h-6 w-4/6 px-2 transition-all border-gray-300 focus:ring-red-400 focus:border-red-400 rounded text-sm">
         </li>
     </ul>
 </template>

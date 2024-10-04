@@ -30,12 +30,12 @@ function handleImageError() {
 </script>
 
 <template>
-    <Head title="Welcome" />
-    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+    <Head title="Главная страница" />
+    <div class="text-black/50 dark:bg-black dark:text-white/50">
         <div
             class="relative flex min-h-screen flex-col items-center selection:bg-[#f87171] selection:text-white"
         >
-            <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
+            <div class="w-full max-w-2xl px-6 lg:max-w-7xl">
                 <header
                     class="grid grid-cols-3 items-center gap-2 py-10"
                 >
@@ -72,13 +72,16 @@ function handleImageError() {
                 </header>
 
                 <main class="mt-6">
-                    <MainPageContent />
+                    <MainPageContent v-if="$page.props.auth.user" />
+                    <div v-else class="max-w-6xl w-full h-auto p-5 mx-auto my-0 text-center">
+                        <p class="text-red-400 font-bold">Войдите в аккант, чтобы пользоваться форумом</p>
+                    </div>
                 </main>
 
                 <footer
-                    class="pt-24 text-center flex justify-center"
+                    class="absolute bottom-5 w-full left-0 text-center pointer-events-none"
                 >
-                    Халтаев Никита
+                    InnovationSoft™ 2024. Все права защищены.
                 </footer>
             </div>
         </div>

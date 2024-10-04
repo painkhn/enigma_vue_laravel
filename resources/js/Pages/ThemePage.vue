@@ -2,6 +2,10 @@
     import Header from '@/Components/Header.vue';
     import ThemeCommentList from '@/Components/ThemeCommentList.vue';
     import { Head, Link } from '@inertiajs/vue3';
+
+    const goBack = () => {
+        window.history.back();
+    }
 </script>
 
 <template>
@@ -11,7 +15,7 @@
 
     <main>
         <div class="themesInfo max-w-6xl w-full mx-auto my-0 h-auto p-5 bg-white shadow-md mt-10 selection:bg-[#f87171] selection:text-white">
-            <Link href="/" class="themesInfo__back text-gray-600 transition-all hover:text-red-400">Вернуться назад</Link>
+            <button @click="goBack" class="themesInfo__back text-gray-600 transition-all hover:text-red-400">Вернуться назад</button>
             <ul class="themesInfo__list flex flex-col gap-3 mt-3">
                 <li>
                     <p class="text-red-400 font-semibold text-xl">Название темы</p>
