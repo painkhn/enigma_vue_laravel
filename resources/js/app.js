@@ -5,8 +5,15 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+import axios from 'axios';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+// Получаем CSRF-токен из мета-тега
+const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+// Устанавливаем токен в заголовки Axios
+axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+
+const appName = import.meta.env.VITE_APP_NAME || 'Enigma';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

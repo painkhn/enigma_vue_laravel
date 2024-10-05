@@ -9,15 +9,15 @@
             <div class="flex items-center justify-between">
                 <h3 class="profileinfo__info-username uppercase text-red-400 font-bold mb-2">{{ $page.props.auth.user.name }}</h3>
                 <div class="flex gap-5 items-center">
-                    <Link href="/profile/edit" class="mb-2 text-gray-600 transition-all hover:text-red-400">Редактировать</Link>
-                    <Link :href="route('logout')" method="post" class="mb-2 text-gray-600 transition-all hover:text-red-400">Выйти</Link>
+                    <Link href="/profile/edit" class="mb-2 text-gray-600 transition-all hover:text-red-400" as="button">Редактировать</Link>
+                    <Link :href="route('logout')" method="post" class="mb-2 text-gray-600 transition-all hover:text-red-400" as="button">Выйти</Link>
                 </div>
             </div>
             <hr class="border-gray-400 opacity-80 mb-2">
             <p class="profileInfo__info-email mb-2">{{ $page.props.auth.user.email }}</p>
             <p class="profileInfo__info-age mb-2">{{ $page.props.auth.user.age }} лет</p>
             <p class="profileInfo__info-sex mb-2">{{ $page.props.auth.user.sex }}</p>
-            <Link href="/theme/create" class="transition-all hover:text-red-400 font-semibold">Создать тему</Link>
+            <Link href="/theme/create" class="transition-all hover:text-red-400 font-semibold" as="button">Создать тему</Link>
         </div>
     </div>
 </template>

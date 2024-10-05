@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\{Theme, Category, User};
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,9 +15,17 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Category::factory()->create([
+            'name' => 'Разработка игр',
+            'link' => 'game_dev',
+        ]);
+        Category::factory()->create([
+            'name' => 'Игровые новости',
+            'link' => 'game_news',
+        ]);
+        Category::factory()->create([
+            'name' => 'Блог',
+            'link' => 'blog',
         ]);
     }
 }
