@@ -3,16 +3,10 @@
 use App\Http\Controllers\{ ProfileController, ThemeController, CategoryController };
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Models\{ Category };
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('home');
+Route::get('/', [ThemeController::class, 'index'])->name('index');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -35,7 +29,11 @@ Route::get('/profile', function() {
 })->name('profile');
 
 Route::get('/theme/create', function() {
-    return Inertia::render('ThemeCreate');
-})->name('themeCreate');
+    $categories = Category::get();
+    return Inertia::render('ThemeCreate', ['categories' => $categories]);
+})->name('themeCreate')->middleware('auth');
+
+Route::post('theme/new', [ThemeController::class, 'store'])->name('new_theme');
 
 require __DIR__.'/auth.php';
+

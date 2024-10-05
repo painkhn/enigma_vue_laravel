@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\{Theme, Category, User};
 use App\Http\Requests\StoreThemeRequest;
 use App\Http\Requests\UpdateThemeRequest;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 use Auth;
 
 class ThemeController extends Controller
@@ -15,8 +17,11 @@ class ThemeController extends Controller
      */
     public function index()
     {
-        $themes = Theme::with('category', 'user')->get();
-        return response()->json($themes);
+        return Inertia::render('Welcome', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'themes' => Theme::get(),
+        ]);
     }
 
     /**
@@ -30,13 +35,13 @@ class ThemeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreThemeRequest $request)
+    public function store(Request $request)
     {
         $theme = Theme::create([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
+            'name' => $request->title,
+            'content' => $request->content,
             'user_id' => Auth::id(),
-            'category_id' => $request->input('category_id'),
+            'category_id' => 1,
         ]);
 
         return response()->json($theme, 201);
