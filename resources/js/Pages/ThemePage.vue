@@ -2,15 +2,18 @@
     import Header from '@/Components/Header.vue';
     import Footer from '@/Components/Footer.vue'
     import ThemeCommentList from '@/Components/ThemeCommentList.vue';
-    import { Head, Link } from '@inertiajs/vue3';
+    import { Head, Link, usePage } from '@inertiajs/vue3';
 
     const goBack = () => {
         window.history.back();
     }
+
+    const props = defineProps(['theme']);
+    const theme = props.value.theme;
 </script>
 
 <template>
-    <Head :title="'Тема'" />
+    <Head :title="theme.name" />
 
     <Header />
 
@@ -19,17 +22,17 @@
             <button @click="goBack" class="themesInfo__back text-gray-600 transition-all hover:text-red-400">Вернуться назад</button>
             <ul class="themesInfo__list flex flex-col gap-3 mt-3">
                 <li>
-                    <p class="text-red-400 font-semibold text-xl">Название темы</p>
+                    <p class="text-red-400 font-semibold text-xl">{{ theme.name }}</p>
                 </li>
                 <li>
-                    <p class="text-gray-600 text-md">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci dolore distinctio iure maxime reiciendis eum maiores expedita sint cum odio! Nostrum itaque ipsa sequi suscipit, nihil provident vel hic illum. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius earum pariatur quasi sit beatae, doloribus expedita quis cupiditate assumenda dolorum ipsum quam ad quidem reprehenderit eveniet ex repellendus enim dolore? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore perferendis, sapiente fuga quam hic nihil necessitatibus qui? Necessitatibus ipsum magnam cupiditate aperiam, beatae molestias fuga quam voluptatem corporis natus est.</p>
+                    <p class="text-gray-600 text-md">{{ theme.content }}</p>
                 </li>
                 <li>
-                    <p class="text-gray-400 text-sm">01.01.2024</p>
+                    <p class="text-gray-400 text-sm">ДАТА СОЗДАНИЯ ТЕМЫ</p>
                 </li>
                 <hr class="border">
                 <li>
-                    <Link href="/profile" class="text-red-400 text font-bold">Username</Link>
+                    <Link :href="`/profile/${theme.user.id}`" class="text-red-400 text font-bold">theme.user.name</Link>
                 </li>
             </ul>
 

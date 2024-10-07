@@ -59,7 +59,7 @@
                     <select v-model="selectedCategory" name="" id="" class="text-gray-600 outline-none h-10 rounded border-gray-300 border transition-all focus:border-red-400 focus:ring-red-400 text-sm">
                         <option value="">Выберите категорию</option>
 
-                        <option v-for="category in $page.props.categories" :key="category.link" :value="category.link">
+                        <option v-for="category in $page.props.categories" :key="category.id" :value="category.id">
                             {{ category.name }}
                         </option>
                     </select>

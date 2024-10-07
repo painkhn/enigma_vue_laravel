@@ -24,6 +24,10 @@ class ThemeController extends Controller
         ]);
     }
 
+    public function themeContent() {
+        // Отображение данных темы из бд
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -41,7 +45,7 @@ class ThemeController extends Controller
             'name' => $request->title,
             'content' => $request->content,
             'user_id' => Auth::id(),
-            'category_id' => 1,
+            'category_id' => $request-> category_id
         ]);
 
         return response()->json($theme, 201);
@@ -52,7 +56,16 @@ class ThemeController extends Controller
      */
     public function show(Theme $theme)
     {
-        return response()->json($theme->load('user', 'category'));
+        $theme = Theme::get([
+            'id' => $theme->id,
+            'name' => $theme->name,
+            'content' => $theme->content,
+            'user_id' => $theme->user_id,
+            'category_id' => $theme->category_id,
+        ]);
+        return Inertia::render('ThemePage', [
+            'theme' => $theme->Theme::all()->load('user', 'category'),
+        ]);
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Models\{ Category };
 use Inertia\Inertia;
 
 Route::get('/', [ThemeController::class, 'index'])->name('index');
+Route::get('/theme/{id}', [ThemeController::class, 'show'])->name('themeShow');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
