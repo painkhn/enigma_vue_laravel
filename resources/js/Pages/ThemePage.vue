@@ -1,4 +1,5 @@
 <script setup>
+    import { ref, onMounted } from 'vue';
     import Header from '@/Components/Header.vue';
     import Footer from '@/Components/Footer.vue'
     import ThemeCommentList from '@/Components/ThemeCommentList.vue';
@@ -8,12 +9,22 @@
         window.history.back();
     }
 
-    const props = defineProps(['theme']);
-    const theme = props.value.theme;
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        return new Date(dateString).toLocaleDateString('ru-RU', options);
+    };
+
+    
+    
+    // const props = defineProps(['theme']);
+    // const theme = $page.props.theme;
+    // onMounted(() => {
+    //     console.log(123);
+    // }),
 </script>
 
 <template>
-    <Head :title="theme.name" />
+    <Head :title="$page.props.theme.name" />
 
     <Header />
 
@@ -22,17 +33,17 @@
             <button @click="goBack" class="themesInfo__back text-gray-600 transition-all hover:text-red-400">Вернуться назад</button>
             <ul class="themesInfo__list flex flex-col gap-3 mt-3">
                 <li>
-                    <p class="text-red-400 font-semibold text-xl">{{ theme.name }}</p>
+                    <p class="text-red-400 font-semibold text-xl">{{ $page.props.theme.name }}</p>
                 </li>
                 <li>
-                    <p class="text-gray-600 text-md">{{ theme.content }}</p>
+                    <p class="text-gray-600 text-md">{{ $page.props.theme.content }}</p>
                 </li>
                 <li>
-                    <p class="text-gray-400 text-sm">ДАТА СОЗДАНИЯ ТЕМЫ</p>
+                    <p class="text-gray-400 text-sm">{{ formatDate($page.props.theme.created_at) }}</p>
                 </li>
                 <hr class="border">
                 <li>
-                    <Link :href="`/profile/${theme.user.id}`" class="text-red-400 text font-bold">theme.user.name</Link>
+                    <Link :href="`/profile/${$page.props.theme.user.id}`" class="text-red-400 text font-bold">{{$page.props.theme.user.name}}</Link>
                 </li>
             </ul>
 

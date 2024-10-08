@@ -27,12 +27,5 @@ class DatabaseSeeder extends Seeder
             'name' => 'Блог',
             'link' => 'blog',
         ]);
-
-        User::factory()->create([
-            'name' => 'Dima',
-            'email' => 'dima@yandex.ru',
-            'age' => '20',
-            'password' => '123123123'
-        ]);
     }
 }

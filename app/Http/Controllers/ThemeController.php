@@ -45,7 +45,7 @@ class ThemeController extends Controller
             'name' => $request->title,
             'content' => $request->content,
             'user_id' => Auth::id(),
-            'category_id' => $request-> category_id
+            'category_id' => $request->category_id
         ]);
 
         return response()->json($theme, 201);
@@ -54,17 +54,18 @@ class ThemeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Theme $theme)
+    public function show($id)
     {
-        $theme = Theme::get([
-            'id' => $theme->id,
-            'name' => $theme->name,
-            'content' => $theme->content,
-            'user_id' => $theme->user_id,
-            'category_id' => $theme->category_id,
-        ]);
+        // $theme = Theme::get([
+        //     'id' => $request->id,
+        //     'name' => $request->name,
+        //     'content' => $request->content,
+        //     'user_id' => $request->user_id,
+        //     'category_id' => $request->category_id,
+        // ]);
+        $theme = Theme::with('user', 'category')->findOrFail($id);
         return Inertia::render('ThemePage', [
-            'theme' => $theme->Theme::all()->load('user', 'category'),
+            'theme' => $theme,
         ]);
     }
 
