@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Models\{ Category };
 use Inertia\Inertia;
 
-Route::get('/{name}', [ThemeController::class, 'profileIndex'])->name('profile');
-
 Route::get('/', [ThemeController::class, 'index'])->name('index');
+Route::get('/users/{name}', [ThemeController::class, 'profileIndex'])->name('profile');
+
 Route::get('/theme/{id}', [ThemeController::class, 'show'])->name('themeShow');
 
 Route::get('/dashboard', function () {
