@@ -5,7 +5,5 @@
 <template>
     <ul class="themesComments__list flex flex-col gap-5">
         <ThemeComment />
-        <ThemeComment />
-        <ThemeComment />
     </ul>
 </template>

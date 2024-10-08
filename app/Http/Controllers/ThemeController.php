@@ -24,6 +24,12 @@ class ThemeController extends Controller
         ]);
     }
 
+    public function profileIndex() {
+        return Inertia::render('Profile', [
+            'themes' => Theme::get() 
+        ]);
+    }
+
     public function themeContent() {
         // Отображение данных темы из бд
     }

@@ -25,9 +25,11 @@ Route::get('/theme', function () {
     ]);
 })->name('theme');
 
-Route::get('/profile', function() {
-    return Inertia::render('Profile');
-})->name('profile');
+// Route::get('/profile',  function() {
+//     return Inertia::render('Profile');
+// })->name('profile');
+
+Route::get('/profile', [ThemeController::class, 'profileIndex'])->name('profile');
 
 Route::get('/theme/create', function() {
     $categories = Category::get();
