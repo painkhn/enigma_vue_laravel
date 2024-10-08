@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\{ Category };
 use Inertia\Inertia;
 
+Route::get('/{name}', [ThemeController::class, 'profileIndex'])->name('profile');
+
 Route::get('/', [ThemeController::class, 'index'])->name('index');
 Route::get('/theme/{id}', [ThemeController::class, 'show'])->name('themeShow');
 
@@ -19,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/theme', function () {
+Route::get('/theme/{theme}', function () {
     return Inertia::render('ThemePage', [
         'canLogin' => Route::has('theme')
     ]);
@@ -29,8 +31,6 @@ Route::get('/theme', function () {
 //     return Inertia::render('Profile');
 // })->name('profile');
 
-Route::get('/profile', [ThemeController::class, 'profileIndex'])->name('profile');
-
 Route::get('/theme/create', function() {
     $categories = Category::get();
     return Inertia::render('ThemeCreate', ['categories' => $categories]);
@@ -39,4 +39,3 @@ Route::get('/theme/create', function() {
 Route::post('theme/new', [ThemeController::class, 'store'])->name('new_theme');
 
 require __DIR__.'/auth.php';
-

@@ -24,9 +24,12 @@ class ThemeController extends Controller
         ]);
     }
 
-    public function profileIndex() {
+    public function profileIndex($name) {
+        #Валидация добавь
+        $user = User::where('name', $name)->first();
         return Inertia::render('Profile', [
-            'themes' => Theme::get() 
+            'themes' => Theme::where('user_id', $user->id)->get(),
+            'user' => $user
         ]);
     }
 
@@ -62,13 +65,6 @@ class ThemeController extends Controller
      */
     public function show($id)
     {
-        // $theme = Theme::get([
-        //     'id' => $request->id,
-        //     'name' => $request->name,
-        //     'content' => $request->content,
-        //     'user_id' => $request->user_id,
-        //     'category_id' => $request->category_id,
-        // ]);
         $theme = Theme::with('user', 'category')->findOrFail($id);
         return Inertia::render('ThemePage', [
             'theme' => $theme,
