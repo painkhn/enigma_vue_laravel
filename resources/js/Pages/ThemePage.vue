@@ -43,7 +43,7 @@
                 </li>
                 <hr class="border">
                 <li>
-                    <Link :href="`/profile/${$page.props.theme.user.id}`" class="text-red-400 text font-bold">{{$page.props.theme.user.name}}</Link>
+                    <Link :href="`/users/${$page.props.theme.user.name}`" class="text-red-400 text font-bold">{{$page.props.theme.user.name}}</Link>
                 </li>
             </ul>
 

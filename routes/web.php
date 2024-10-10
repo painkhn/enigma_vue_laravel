@@ -18,13 +18,13 @@ Route::controller(App\Http\Controllers\ThemeController::class)->group(function (
 });
 
 Route::controller(App\Http\Controllers\ProfileController::class)->group(function() {
-    Route::get('/users/{name}', [ProfileController::class, 'profileIndex'])->name('profile');
+    Route::middleware('auth')->group(function () {
+        Route::get('/users/{name}', 'profileIndex')->name('profile');
+        Route::get('/profile/edit', 'edit')->name('profile.edit');
+        Route::patch('/profile/update',  'update')->name('profile.update');
+        Route::delete('/profile/destroy', 'destroy')->name('profile.destroy');
+    });
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 require __DIR__.'/auth.php';

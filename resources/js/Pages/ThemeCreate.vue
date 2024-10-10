@@ -17,7 +17,12 @@
                 content: content.value,
                 category_id: selectedCategory.value,
             });
-            console.log('Тема создана:', response.data);
+
+            if (response.data.redirect) {
+                window.location.href = response.data.redirect;
+            }
+            // console.log('Данные:', content.value);
+            // console.log('Тема создана');
             // Здесь вы можете перенаправить пользователя или очистить форму
         } catch (error) {
             console.error('Ошибка при создании темы:', error);

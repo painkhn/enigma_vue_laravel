@@ -46,14 +46,15 @@ class ThemeController extends Controller
      */
     public function store(Request $request)
     {
+        $array_request = $request->all();
         $theme = Theme::create([
             'name' => $request->title,
-            'content' => $request->content,
+            'content' => $array_request['content'],
             'user_id' => Auth::id(),
             'category_id' => $request->category_id
         ]);
 
-        return response()->json($theme, 201);
+        return response()->json(['redirect' => '/']);
     }
 
     /**
