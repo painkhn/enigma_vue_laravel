@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\{Theme, Category, User};
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -16,6 +17,15 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+
+    public function profileIndex($name) {
+        #Валидация добавь
+        $user = User::where('name', $name)->first();
+        return Inertia::render('Profile', [
+            'themes' => Theme::where('user_id', $user->id)->get(),
+            'user' => $user
+        ]);
+    }
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [

@@ -24,18 +24,14 @@ class ThemeController extends Controller
         ]);
     }
 
-    public function profileIndex($name) {
-        #Валидация добавь
-        $user = User::where('name', $name)->first();
-        return Inertia::render('Profile', [
-            'themes' => Theme::where('user_id', $user->id)->get(),
-            'user' => $user
-        ]);
-    }
-
-    public function themeContent() {
-        // Отображение данных темы из бд
-    }
+    // public function profileIndex($name) {
+    //     #Валидация добавь
+    //     $user = User::where('name', $name)->first();
+    //     return Inertia::render('Profile', [
+    //         'themes' => Theme::where('user_id', $user->id)->get(),
+    //         'user' => $user
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.

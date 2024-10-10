@@ -27,5 +27,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Блог',
             'link' => 'blog',
         ]);
+        Category::factory()->create([
+            'name' => 'кислая',
+            'link' => 'kislaya',
+        ]);
     }
 }
