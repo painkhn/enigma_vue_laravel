@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\{ ProfileController, ThemeController, CategoryController };
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Models\{ Category };
