@@ -15,12 +15,17 @@ class ThemeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index($theme = null)
+    {   
+        if ($theme) {
+            $themes = $theme;    
+        } else {
+            $themes = Theme::all();
+        }
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
-            'themes' => Theme::get(),
+            'themes' => $themes,
             'categories' => Category::get(),
         ]);
     }
@@ -95,5 +100,12 @@ class ThemeController extends Controller
         $theme->delete();
         
         return response()->json(['message' => 'Theme deleted successfully']);
+    }
+
+    public function search(Request $request) {
+        $word = $request->word;
+        $theme_search = Theme::where('name', 'like', "%{$word}%")->orderBy('id')->get();
+        // return $this->index($theme=$theme_search);
+        return response()->json($theme_search);
     }
 }

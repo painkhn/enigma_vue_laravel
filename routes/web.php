@@ -13,7 +13,7 @@ Route::controller(App\Http\Controllers\ThemeController::class)->group(function (
     })->name('themeCreate')->middleware('auth');
     Route::get('/theme/{id}', 'show')->name('themeShow');
     Route::post('theme/new',  'store')->name('new_theme');
-    
+    Route::post('/search', 'search')->name('search');    
 });
 
 Route::controller(App\Http\Controllers\ProfileController::class)->group(function() {

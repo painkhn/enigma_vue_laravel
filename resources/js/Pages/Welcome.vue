@@ -32,12 +32,12 @@ function handleImageError() {
         >
             <div class="w-full max-w-2xl px-6 lg:max-w-7xl">
                 <header
-                    class="grid grid-cols-3 items-center gap-2 py-10"
+                    class="grid grid-cols-2 items-center gap-2 py-10"
                 >
                     <div class="flex justify-self-start lg:col-start-1 lg:justify-center">
                         <PageLogo />
                     </div>
-                    <HeaderSearch class="focus:shadow-red-400" />
+                    <!-- <HeaderSearch class="focus:shadow-red-400" /> -->
                     <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
                         <Link
                             v-if="$page.props.auth.user"
