@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+// use App\Models\{Theme, Category, User};
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use Inertia\Inertia;
@@ -34,7 +35,7 @@ class CategoryController extends Controller
     public function store(request $request)
     {
         $category = Category::create([
-            'name'=> $request->name,
+            'name' => $request->name,
         ]);
         return response()->json($category, 201);
     }
@@ -68,9 +69,24 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
+        // $categories::all();
+        // $category::delete([
+        //     'category_id' => $request->id,
+        // ]
+        // );
+        // try {
+        //     $category->delete();
+        //     return response()->json(['message' => 'Category deleted successfully']);    
+        // } catch (\Exception $e) {
+        //     return response()->json(['message' => $e->getMessage()], 500);
+        // }
+        // $category = Category::delete([
+        //     'category_id' => $request->id,
+        // ]);
+        $category = Category::all($id);
         $category->delete();
-        return response()->json(['message' => 'Category deleted successfully']);
+        return response()->json($category, 200);
     }
 }
