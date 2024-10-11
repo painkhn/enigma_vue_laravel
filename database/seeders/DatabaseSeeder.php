@@ -16,20 +16,13 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         Category::factory()->create([
-            'name' => 'Разработка игр',
-            'link' => 'game_dev',
+            'name' => 'Разработка игр'
         ]);
         Category::factory()->create([
             'name' => 'Игровые новости',
-            'link' => 'game_news',
         ]);
         Category::factory()->create([
             'name' => 'Блог',
-            'link' => 'blog',
-        ]);
-        Category::factory()->create([
-            'name' => 'кислая',
-            'link' => 'kislaya',
         ]);
     }
 }

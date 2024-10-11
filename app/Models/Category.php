@@ -11,7 +11,6 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'link',
     ];
     public function theme(){
         return $this->hasMany(Theme::class);

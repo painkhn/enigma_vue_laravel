@@ -25,5 +25,9 @@ Route::controller(App\Http\Controllers\ProfileController::class)->group(function
     });
 });
 
+Route::controller(App\Http\Controllers\CategoryController::class)->group(function() {
+    Route::post('category/new', 'store')->name('new_category');
+});
+
 
 require __DIR__.'/auth.php';

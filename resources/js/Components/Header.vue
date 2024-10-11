@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <header class="header w-full h-32 flex items-center justify-center shadow-xl flex-col gap-2 rounded-md">
+    <header class="header w-full h-32 flex items-center justify-center shadow-xl flex-col gap-2 rounded-md bg-white">
         <Link href="/">
             <PageLogo />
         </Link>

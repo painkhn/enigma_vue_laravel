@@ -15,7 +15,6 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 15)->unique();
-            $table->string('link', 15)->unique();
             $table->timestamps();
         });
     }

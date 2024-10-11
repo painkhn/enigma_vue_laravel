@@ -18,7 +18,6 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => '',
-            'link' => '',
         ];
     }
 }

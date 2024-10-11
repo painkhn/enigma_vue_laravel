@@ -29,9 +29,11 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(request $request)
     {
-        $category = Category::create($request->validated());
+        $category = Category::create([
+            'name'=> $request->name,
+        ]);
         return response()->json($category, 201);
     }
 
