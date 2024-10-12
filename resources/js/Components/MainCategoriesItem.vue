@@ -1,12 +1,13 @@
 <script setup>
-    import { ref } from 'vue';
+    import axios from 'axios';
+import { ref } from 'vue';
 
     const title = ref('')
     const props = defineProps({
         categories: Array,
-        themes: Array
+        themes: Array,
+        category: String
     })
-    // const categories = ref($page.props.categories)
 
     const createCategory = async () => {
         try {
@@ -21,11 +22,11 @@
     
     const deleteCategory = async (categoryId) => {
         try {
-            const response = await axios.delete(route('delete_category'), {
-                id: categoryId,
+            const response = await axios.delete(route('delete_category', {id: categoryId}), { 
+                'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
             });
             console.log('Успешно', response.data.message)
-            // location.reload()
+            location.reload()
         } catch (error) {
             console.log(error, categoryId)
         }
@@ -35,9 +36,9 @@
 <template>
     <h2 class="main__categories-title text-red-400 font-bold text-2xl mb-5">Категории</h2>
     <ul class="main__categories-list flex flex-col gap-2 text-gray-800 dark:text-white mb-5">
-        <li v-for="category in $page.props.categories" :key="category.id" class="mb-4">
+        <li v-for="category in $page.props.categories" :key="category.id" class="mb-4 relative">
             <a href="#!" class="transition-all hover:text-red-400 font-medium p-2 bg-gray-100 rounded-md hover:border-l-2 hover:border-red-400">{{ category.name }}</a>
-            <button @click="deleteCategory(category.id)">X</button>
+            <button @click="deleteCategory(category.id)" class="absolute right-0">X</button>
         </li>
         <li v-if="$page.props.auth.user && $page.props.auth.user.is_admin == 1">
             <form @submit.prevent="createCategory" method="POST" class="flex items-center gap-2">

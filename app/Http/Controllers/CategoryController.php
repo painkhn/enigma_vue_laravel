@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-// use App\Models\{Theme, Category, User};
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use Inertia\Inertia;
@@ -43,19 +42,19 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
-    {
-        return response()->json($category);
+    // public function show(Category $category)
+    // {
+    //     return response()->json($category);
 
-    }
+    // }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
-    {
-        return view('categories.edit', compact('category'));
-    }
+    // public function edit(Category $category)
+    // {
+    //     return view('categories.edit', compact('category'));
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -69,24 +68,14 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        // $categories::all();
-        // $category::delete([
-        //     'category_id' => $request->id,
-        // ]
-        // );
-        // try {
-        //     $category->delete();
-        //     return response()->json(['message' => 'Category deleted successfully']);    
-        // } catch (\Exception $e) {
-        //     return response()->json(['message' => $e->getMessage()], 500);
-        // }
-        // $category = Category::delete([
-        //     'category_id' => $request->id,
-        // ]);
-        $category = Category::all($id);
+        // Category::where('id', $request->id);
+        // // dd($request);
+        // $category = $request->id;
+        // dd($category);
         $category->delete();
-        return response()->json($category, 200);
+        // $category->$request->category_id->delete();
+        return response()->json($category, 201);
     }
 }

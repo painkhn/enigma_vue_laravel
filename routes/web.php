@@ -27,7 +27,7 @@ Route::controller(App\Http\Controllers\ProfileController::class)->group(function
 
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function() {
     Route::post('category/new', 'store')->name('new_category');
-    Route::delete('category/delete', 'destroy')->name('delete_category');
+    Route::delete('category/delete/{category}', 'destroy')->name('delete_category');
 });
 
 
