@@ -41,6 +41,9 @@
                 <li>
                     <p class="text-gray-400 text-sm">{{ formatDate($page.props.theme.created_at) }}</p>
                 </li>
+                <li>
+                    <p class="text-red-400 font-semibold">{{ $page.props.theme.category.name }}</p>
+                </li>
                 <hr class="border">
                 <li>
                     <Link :href="`/users/${$page.props.theme.user.name}`" class="text-red-400 text font-bold">{{$page.props.theme.user.name}}</Link>

@@ -24,5 +24,19 @@ class DatabaseSeeder extends Seeder
         Category::factory()->create([
             'name' => 'Блог',
         ]);
+
+        // User::factory()->create([
+        //     'name' => 'dima',
+        //     'email' => 'dima@mail.ru', 
+        //     'age' => 20, 
+        //     'password' => '123123123',
+        // ]);
+
+        // Theme::factory()->create([
+        //     'category_id' => 1,
+        //     'user_id' => 1,
+        //     'name' => 'example title',
+        //     'content' => 'example content',
+        // ]);
     }
 }
