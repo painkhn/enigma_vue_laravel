@@ -18,15 +18,17 @@ class ThemeController extends Controller
     public function index($theme = null)
     {   
         if ($theme) {
-            $themes = $theme;    
+            $themes = $theme;
         } else {
             $themes = Theme::all();
+            $users = User::all();
         }
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'themes' => $themes,
             'categories' => Category::get(),
+            'users' => $users
         ]);
     }
 

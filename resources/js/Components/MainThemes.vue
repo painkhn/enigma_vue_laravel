@@ -22,7 +22,7 @@
             console.error('Ошибка при поиске темы:', error);
         }
     }
-    console.log(searchResults.value);
+    // console.log(searchResults.value);
 
 </script>
 

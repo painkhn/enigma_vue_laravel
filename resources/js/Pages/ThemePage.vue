@@ -20,7 +20,6 @@
                 'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
             });
             console.log('Успешно', response.data.message)
-            // location.reload()
             if (response.data.redirect) {
                 window.location.href = response.data.redirect;
             }
@@ -56,7 +55,7 @@
                     <Link :href="`/users/${$page.props.theme.user.name}`" class="text-red-400 text font-bold">{{$page.props.theme.user.name}}</Link>
                 </li>
                 <li>
-                    <button @click="deleteTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
+                    <button v-if="$page.props.auth.user.is_admin == 1" @click="deleteTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
                         Удалить тему
                     </button>
                 </li>
