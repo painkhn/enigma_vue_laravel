@@ -70,12 +70,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        // Category::where('id', $request->id);
-        // // dd($request);
-        // $category = $request->id;
-        // dd($category);
         $category->delete();
-        // $category->$request->category_id->delete();
         return response()->json($category, 201);
     }
 }

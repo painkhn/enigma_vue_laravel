@@ -14,13 +14,20 @@
         return new Date(dateString).toLocaleDateString('ru-RU', options);
     };
 
-    
-    
-    // const props = defineProps(['theme']);
-    // const theme = $page.props.theme;
-    // onMounted(() => {
-    //     console.log(123);
-    // }),
+    const deleteTheme = async (themeId) => {
+        try {
+            const response = await axios.delete(route('delete_theme', {id: themeId}), { 
+                'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
+            });
+            console.log('Успешно', response.data.message)
+            // location.reload()
+            if (response.data.redirect) {
+                window.location.href = response.data.redirect;
+            }
+        } catch (error) {
+            console.log(error, themeId)
+        }
+    }
 </script>
 
 <template>
@@ -47,6 +54,11 @@
                 <hr class="border">
                 <li>
                     <Link :href="`/users/${$page.props.theme.user.name}`" class="text-red-400 text font-bold">{{$page.props.theme.user.name}}</Link>
+                </li>
+                <li>
+                    <button @click="deleteTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
+                        Удалить тему
+                    </button>
                 </li>
             </ul>
 

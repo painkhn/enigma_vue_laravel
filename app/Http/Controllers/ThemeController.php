@@ -98,8 +98,7 @@ class ThemeController extends Controller
     public function destroy(Theme $theme)
     {
         $theme->delete();
-        
-        return response()->json(['message' => 'Theme deleted successfully']);
+        return response()->json(['redirect' => '/']);
     }
 
     public function search(Request $request) {
