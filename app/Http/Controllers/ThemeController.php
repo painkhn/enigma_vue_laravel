@@ -20,7 +20,7 @@ class ThemeController extends Controller
         if ($theme) {
             $themes = $theme;
         } else {
-            $themes = Theme::all();
+            $themes = Theme::with('category')->get();
             $users = User::all();
         }
         return Inertia::render('Welcome', [
@@ -114,5 +114,11 @@ class ThemeController extends Controller
         $theme_search = Theme::where('name', 'like', "%{$word}%")->orderBy('id')->get();
         // return $this->index($theme=$theme_search);
         return response()->json($theme_search);
+    }
+
+    public function filterByCategory($categoryId)
+    {
+        $themes = Theme::where('category_id', $categoryId)->with('user', 'category')->get();
+        return response()->json($themes);
     }
 }

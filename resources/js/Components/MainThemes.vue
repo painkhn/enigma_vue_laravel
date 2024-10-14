@@ -1,12 +1,33 @@
 <script setup>
     import { Link } from '@inertiajs/vue3';
     import { defineProps } from 'vue';
-    import { ref } from 'vue';
+    import { ref, onMounted } from 'vue';
 
     const props = defineProps({
         categories: Array,
         themes: Array
     })
+
+    const themes = ref(['...props.themes']);
+
+    const fetchThemes = async () => {
+        try {
+            const response = await axios.get('index'); // Или ваш маршрут для получения всех тем
+            props.themes.value = response.data;
+        } catch (error) {
+            console.error('Ошибка при получении тем:', error);
+        }
+    };
+
+    const filterThemesByCategory = async (categoryId) => {
+        try {
+            const response = await axios.get(`/category/${categoryId}`); // Ваш маршрут для фильтрации по категории
+            props.themes.value = response.data; // Обновите темы с отфильтрованными данными
+            searchResults.value = []; // Очистите результаты поиска при фильтрации
+        } catch (error) {
+            console.error('Ошибка при фильтрации тем:', error);
+        }
+    }
 
     const searchWord = ref('');
     const word = ref('')
@@ -22,6 +43,10 @@
             console.error('Ошибка при поиске темы:', error);
         }
     }
+
+    // onMounted(() => {
+    //     fetchThemes();
+    // });
     // console.log(searchResults.value);
 
 </script>
@@ -41,6 +66,7 @@
                     {{ theme.name }}
                 </Link>
             </li>
+            <li v-if="themes.length === 0">Нет доступных тем.</li>
         </ul>
 
         <ul class="main__themes-list flex flex-col gap-3 text-gray-600 dark:text-white" v-else>
