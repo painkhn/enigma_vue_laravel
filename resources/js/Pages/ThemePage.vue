@@ -27,15 +27,31 @@
             console.log(error, themeId)
         }
     }
+
+    const props = defineProps({
+        canLogin: {
+            type: Boolean,
+        },
+        canRegister: {
+            type: Boolean,
+        },
+        user: {
+            type: Object,
+        }
+    });
 </script>
 
 <template>
     <Head :title="$page.props.theme.name" />
 
-    <Header />
+    <Header
+        :canLogin="props.canLogin" 
+        :canRegister="props.canRegister" 
+        :user="props.user"
+    />
 
     <main>
-        <div class="themesInfo max-w-6xl w-full mx-auto my-0 h-auto p-5 bg-white shadow-md mt-10 selection:bg-[#f87171] selection:text-white mb-10">
+        <div class="themesInfo max-w-7xl rounded-md w-full mx-auto my-0 h-auto p-5 bg-white shadow-md mt-10 selection:bg-[#f87171] selection:text-white mb-10">
             <button @click="goBack" class="themesInfo__back text-gray-600 transition-all hover:text-red-400">Вернуться назад</button>
             <ul class="themesInfo__list flex flex-col gap-3 mt-3">
                 <li>

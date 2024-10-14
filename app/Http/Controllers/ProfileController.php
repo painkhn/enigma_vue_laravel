@@ -7,6 +7,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -23,7 +24,10 @@ class ProfileController extends Controller
         $user = User::where('name', $name)->first();
         return Inertia::render('Profile', [
             'themes' => Theme::where('user_id', $user->id)->get(),
-            'user' => $user
+            'user' => $user,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            // 'user' => Auth::user(),
         ]);
     }
     public function edit(Request $request): Response

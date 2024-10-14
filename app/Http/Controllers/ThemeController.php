@@ -26,6 +26,7 @@ class ThemeController extends Controller
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
+            'user' => Auth::user(),
             'themes' => $themes,
             'categories' => Category::get(),
             'users' => $users
@@ -56,6 +57,9 @@ class ThemeController extends Controller
     {
         $array_request = $request->all();
         $theme = Theme::create([
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            // 'user' => Auth::user(),
             'name' => $request->title,
             'content' => $array_request['content'],
             'user_id' => Auth::id(),
@@ -72,6 +76,8 @@ class ThemeController extends Controller
     {
         $theme = Theme::with('user', 'category')->findOrFail($id);
         return Inertia::render('ThemePage', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
             'theme' => $theme,
         ]);
     }

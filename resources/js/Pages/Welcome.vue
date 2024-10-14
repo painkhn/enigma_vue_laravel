@@ -5,14 +5,18 @@ import HeaderSearch from '@/Components/HeaderSearch.vue'
 import MainPageContent from '@/Components/MainPageContent.vue'
 import GuestWelcome from '@/Components/GuestWelcome.vue'
 import Footer from '@/Components/Footer.vue'
+import Header from '@/Components/Header.vue'
 
-defineProps({
+const props = defineProps({
     canLogin: {
         type: Boolean,
     },
     canRegister: {
         type: Boolean,
     },
+    user: {
+        type: Object,
+    }
 });
 
 function handleImageError() {
@@ -26,18 +30,23 @@ function handleImageError() {
 <template>
     <Head title="Главная страница" />
 
+    <Header
+        :canLogin="props.canLogin" 
+        :canRegister="props.canRegister" 
+        :user="props.user"
+    />
+
     <div class="text-black/50 dark:bg-black dark:text-white/50">
         <div
             class="relative flex min-h-screen flex-col items-center selection:bg-[#f87171] selection:text-white"
         >
             <div class="w-full max-w-2xl px-6 lg:max-w-7xl">
-                <header
+                <!-- <header
                     class="grid grid-cols-2 items-center gap-2 py-10"
                 >
                     <div class="flex justify-self-start lg:col-start-1 lg:justify-center">
                         <PageLogo />
                     </div>
-                    <!-- <HeaderSearch class="focus:shadow-red-400" /> -->
                     <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
                         <Link
                             v-if="$page.props.auth.user"
@@ -64,7 +73,9 @@ function handleImageError() {
                             </Link>
                         </template>
                     </nav>
-                </header>
+                </header> -->
+
+                
 
                 <main class="mt-6">
                     <MainPageContent v-if="$page.props.auth.user" />                    
