@@ -5,7 +5,8 @@
 
     const props = defineProps({
         categories: Array,
-        themes: Array
+        themes: Array,
+        category: Array
     })
 
     const searchWord = ref('');
@@ -27,7 +28,7 @@
 
 <template>
     <div class="main__themes w-8/12 h-auto p-10 rounded-xl bg-white dark:bg-zinc-800 shadow-xl">
-        <h2 class="main__themes-title text-red-400 font-bold text-2xl mb-5">Название категории</h2>
+        <h2 class="main__themes-title text-red-400 font-bold text-2xl mb-5">Темы</h2>
         <form @submit.prevent="searchThemes" method="POST" class="header__search-form flex items-center mb-5">
             <input v-model="word" @input="searchWord" type="search" name="word" id="" class="header__search-input w-full dark:bg-zinc-800 bg-white dark:focus:bg-zinc-700 text-gray-800 outline-none px-4 h-8 rounded-md focus:ring-1 focus:ring-red-400 focus:ring-offset-red-400 focus:ring-offset-0 transition-all border focus:border-red-400 focus:outline-none dark:border-red-400 focus:shadow-md dark:focus:shadow-black" placeholder="Поиск...">
             <button class="w-10 h-10 hover:scale-125 transition-all bg-transparent" type="submit">
