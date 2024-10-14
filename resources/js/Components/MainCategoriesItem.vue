@@ -10,8 +10,6 @@
         category: String
     })
 
-    // const themes = ref([props.themes])
-
     const createCategory = async () => {
         try {
             const response = await axios.post(route('new_category'), {
@@ -35,20 +33,13 @@
         }
     }
 
-    const emit = defineEmits(['filterByCategory']);
-
-    const handleCategoryClick = (categoryId) => {
-        console.log('Clicked category ID:', categoryId);
-        emit('filterByCategory', categoryId);
-    };
-
 </script>
 
 <template>
     <h2 class="main__categories-title text-red-400 font-bold text-2xl mb-5">Категории</h2>
     <ul class="main__categories-list flex flex-col gap-2 text-gray-800 dark:text-white mb-5">
         <li v-for="category in $page.props.categories" :key="category.id" class="mb-4 relative">
-            <a @click.prevent="handleCategoryClick(category.id)" href="#!" class="transition-all hover:text-red-400 font-medium p-2 bg-gray-100 rounded-md hover:border-l-2 hover:border-red-400">{{ category.name }}</a>
+            <a :href="route('filter_by_category', category.id)" class="transition-all hover:text-red-400 font-medium p-2 bg-gray-100 rounded-md hover:border-l-2 hover:border-red-400">{{ category.name }}</a>
             <button v-if="$page.props.auth.user.is_admin == 1" @click="deleteCategory(category.id)" class="absolute right-0">
                 <svg class="transition-all hover:scale-125" width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 12V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 12V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
             </button>

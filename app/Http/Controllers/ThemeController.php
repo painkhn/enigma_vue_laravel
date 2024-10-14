@@ -21,8 +21,8 @@ class ThemeController extends Controller
             $themes = $theme;
         } else {
             $themes = Theme::with('category')->get();
-            $users = User::all();
         }
+        $users = User::all();
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
@@ -119,6 +119,9 @@ class ThemeController extends Controller
     public function filterByCategory($categoryId)
     {
         $themes = Theme::where('category_id', $categoryId)->with('user', 'category')->get();
-        return response()->json($themes);
+        // dd($themes);
+        // return response()->json($themes);
+        // return Inertia::render('Welcome')
+        return $this->index($theme=$themes);
     }
 }

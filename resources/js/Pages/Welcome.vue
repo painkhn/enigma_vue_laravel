@@ -1,11 +1,15 @@
 <template>
     <Head title="Главная страница" />
-    <Header :canLogin="props.canLogin" :canRegister="props.canRegister" :user="props.user" />
+    <Header 
+        :canLogin="props.canLogin" 
+        :canRegister="props.canRegister" 
+        :user="props.user" 
+    />
     <div class="text-black/50 dark:bg-black dark:text-white/50">
         <div class="relative flex min-h-screen flex-col items-center selection:bg-[#f87171] selection:text-white">
             <div class="w-full max-w-2xl px-6 lg:max-w-7xl">
                 <main class="mt-6">
-                    <MainPageContent v-if="$page.props.auth.user" :themes="themes" :categories="categories" />                    
+                    <MainPageContent v-if="$page.props.auth.user" />                    
                     <GuestWelcome v-else />
                 </main>
                 <Footer />
@@ -28,7 +32,4 @@ const props = defineProps({
     themes: Array,
     categories: Array,
 });
-
-console.log('Themes:', props.themes);
-console.log('Categories:', props.categories);
 </script>
