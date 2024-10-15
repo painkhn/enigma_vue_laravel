@@ -17,14 +17,22 @@
 
 <template>
     <div class="w-full bg-white shadow-xl">
-        <header class="header max-w-7xl w-full h-14 flex items-center justify-between mx-auto my-0 gap-2 rounded-md">
+        <header class="header max-w-7xl w-full h-14 grid grid-cols-3 items-center mx-auto my-0 gap-2 rounded-md">
             <Link href="/">
                 <PageLogo />
             </Link>
-            <!-- <Link v-if="$page.props.auth.user.is_admin == 1" class="header__admin-link transition-all hover:text-red-400 font-medium">
-                Панель администратора
-            </Link> -->
-            <nav v-if="canLogin" class="flex flex-1 justify-end">
+            <nav class="justify-self-center justify-center flex items-center gap-5 w-full">
+                <Link :href="'/'" class="transition-all hover:text-red-400 font-medium">
+                    Главная
+                </Link>
+                <Link :href="route('themeCreate')" class="transition-all hover:text-red-400 font-medium">
+                    Создать тему
+                </Link>
+                <Link :href="'/'" v-if="$page.props.auth.user && $page.props.auth.user.is_admin == 1" class="header__admin-link transition-all hover:text-red-400 font-medium">
+                    Панель администратора
+                </Link>
+            </nav>
+            <nav v-if="canLogin" class="flex flex-1 justify-self-end">
                 <Link
                     v-if="$page.props.auth.user"
                     :href="route('profile', { name: $page.props.auth.user.name})"
