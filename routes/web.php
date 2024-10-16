@@ -32,5 +32,10 @@ Route::controller(App\Http\Controllers\CategoryController::class)->group(functio
     Route::delete('/category/delete/{category}', 'destroy')->name('delete_category');
 });
 
+Route::controller(App\Http\Controllers\CommentsController::class)->group(function() {
+    Route::post('/comment/new','store')->name('new_comment');
+    // Route::get('/comment', 'index')->name('get_comment');
+});
+
 
 require __DIR__.'/auth.php';

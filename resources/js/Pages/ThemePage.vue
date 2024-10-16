@@ -3,7 +3,9 @@
     import Header from '@/Components/Header.vue';
     import Footer from '@/Components/Footer.vue'
     import ThemeCommentList from '@/Components/ThemeCommentList.vue';
+    import CommentForm from '@/Components/CommentForm.vue';
     import { Head, Link, usePage } from '@inertiajs/vue3';
+import theme from 'tailwindcss/defaultTheme';
 
     const goBack = () => {
         window.history.back();
@@ -37,6 +39,12 @@
         },
         user: {
             type: Object,
+        },
+        theme: {
+            type: Object
+        },
+        comments: {
+            type: Object
         }
     });
 </script>
@@ -78,14 +86,10 @@
             </ul>
 
             <div class="themesComments py-10 w-full h-auto">
-                <form action="" class="themesComments__form flex flex-col mb-5">
-                    <label for="" class="themesComments__form-label mb-1 text-gray-600 font-semibold">Введите комментарий</label>
-                    <input type="text" class="themesComments__form-input placeholder:text-gray-400 mb-5 w-full h-10 transition-all border-gray-400 focus:ring-red-400 focus:border-red-400 rounded text-gray-600" placeholder="Ваш комментарий">
-                    <input type="submit" value="Отправить" class="themesComments__form-submit w-full h-10 bg-red-400 text-white font-semibold transition-all hover:bg-red-300 rounded-md cursor-pointer">
-                </form>
+                <CommentForm :theme="theme" />
 
                 <h2 class="themesComments__title text-red-400 text-xl font-bold text-center mb-5">Комментарии</h2>
-                <ThemeCommentList />
+                <ThemeCommentList :comments="comments" :theme="theme" />
             </div>
         </div>
     </main>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Theme, Category, User};
+use App\Models\{Theme, Category, User, Comments};
 use App\Http\Requests\StoreThemeRequest;
 use App\Http\Requests\UpdateThemeRequest;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +21,7 @@ class ThemeController extends Controller
             $themes = $theme;
         } else {
             $themes = Theme::with('category')->get();
+            // $comments = [];
         }
         $users = User::all();
         return Inertia::render('Welcome', [
@@ -29,7 +30,7 @@ class ThemeController extends Controller
             'user' => Auth::user(),
             'themes' => $themes,
             'categories' => Category::get(),
-            'users' => $users
+            'users' => $users,
         ]);
     }
 
@@ -74,11 +75,13 @@ class ThemeController extends Controller
      */
     public function show($id)
     {
-        $theme = Theme::with('user', 'category')->findOrFail($id);
+        $theme = Theme::with('user', 'category', 'comments')->findOrFail($id);
+        // $comments = Comments::where('theme_id', $id)->get();
         return Inertia::render('ThemePage', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'theme' => $theme,
+            // 'comments' => $comments
         ]);
     }
 
