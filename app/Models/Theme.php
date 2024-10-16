@@ -11,6 +11,7 @@ class Theme extends Model
     protected $fillable = [
         'category_id', 
         'user_id',
+        'comment_id',
         'name', 
         'content',
         'link'
