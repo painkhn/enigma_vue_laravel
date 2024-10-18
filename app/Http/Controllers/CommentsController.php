@@ -74,6 +74,7 @@ class CommentsController extends Controller
      */
     public function destroy(Comments $comments)
     {
-        //
+        $comments->delete();
+        return response()->json(['redirect' => '/']);
     }
 }

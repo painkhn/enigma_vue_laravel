@@ -34,6 +34,7 @@ Route::controller(App\Http\Controllers\CategoryController::class)->group(functio
 
 Route::controller(App\Http\Controllers\CommentsController::class)->group(function() {
     Route::post('/comment/new','store')->name('new_comment');
+    Route::delete('/comment/delete/{comments}','destroy')->name('delete_comment');
     // Route::get('/comment', 'index')->name('get_comment');
 });
 
