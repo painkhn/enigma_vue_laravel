@@ -77,11 +77,13 @@ class ThemeController extends Controller
     {
         $theme = Theme::with('user', 'category', 'comments')->findOrFail($id);
         // dd($theme);
-        // $comments = Comments::where('theme_id', $id)->get();
+        $comments = Comments::where('theme_id', $id)->get();
+        dd($theme->user);
         return Inertia::render('ThemePage', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'theme' => $theme,
+            'comments' => $comments
             // 'comments' => $comments
         ]);
     }

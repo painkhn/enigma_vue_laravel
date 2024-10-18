@@ -5,7 +5,7 @@
     import ThemeCommentList from '@/Components/ThemeCommentList.vue';
     import CommentForm from '@/Components/CommentForm.vue';
     import { Head, Link, usePage } from '@inertiajs/vue3';
-import theme from 'tailwindcss/defaultTheme';
+    import theme from 'tailwindcss/defaultTheme';
 
     const goBack = () => {
         window.history.back();
@@ -47,6 +47,10 @@ import theme from 'tailwindcss/defaultTheme';
             type: Object
         }
     });
+
+    onMounted(() => {
+        console.log('Comments:', props.comments);
+    })
 </script>
 
 <template>
@@ -89,7 +93,7 @@ import theme from 'tailwindcss/defaultTheme';
                 <CommentForm :theme="props.theme" />
 
                 <h2 class="themesComments__title text-red-400 text-xl font-bold text-center mb-5">Комментарии</h2>
-                <ThemeCommentList :comments="comments" />
+                <ThemeCommentList :comments="props.comments"  />
             </div>
         </div>
     </main>

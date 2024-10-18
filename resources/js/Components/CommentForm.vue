@@ -18,9 +18,11 @@
                 theme_id: props.theme.id 
             });
 
-            if (response.data.redirect) {
-                window.location.href = response.data.redirect;
-            }
+            location.reload()
+
+            // if (response.data.redirect) {
+            //     window.location.href = response.data.redirect;
+            // }
 
             console.log('Коммент создан', content.value)
             // console.log('Данные:', content.value);
