@@ -76,7 +76,7 @@ class ThemeController extends Controller
     public function show($id)
     {
         $theme = Theme::with('user', 'category', 'comments')->findOrFail($id);
-        dd($theme);
+        // dd($theme);
         // $comments = Comments::where('theme_id', $id)->get();
         return Inertia::render('ThemePage', [
             'canLogin' => Route::has('login'),

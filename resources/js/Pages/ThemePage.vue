@@ -86,10 +86,10 @@ import theme from 'tailwindcss/defaultTheme';
             </ul>
 
             <div class="themesComments py-10 w-full h-auto">
-                <CommentForm :theme="theme" />
+                <CommentForm :theme="props.theme" />
 
                 <h2 class="themesComments__title text-red-400 text-xl font-bold text-center mb-5">Комментарии</h2>
-                <ThemeCommentList :comments="comments" :theme="theme" />
+                <ThemeCommentList :comments="comments" />
             </div>
         </div>
     </main>
