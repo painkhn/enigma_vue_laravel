@@ -21,7 +21,7 @@
 <template>
     <ul class="themesComments__list flex flex-col gap-5">
         <!-- <ThemeComment /> -->
-         <p>{{ props.comments }}</p>
+         <!-- <p>{{ props.comments }}</p> -->
 
         <li v-for="(comment, index) in props.comments" :key="comment.id">
             <div class="themesComments__list-item w-full p-5 rounded-md border border-black flex flex-col gap-3">
