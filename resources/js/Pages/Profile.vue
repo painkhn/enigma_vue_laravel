@@ -5,6 +5,7 @@
     import ProfileThemes from '@/Components/ProfileThemes.vue';
     import ProfileComments from '@/Components/ProfileComments.vue';
     import Footer from '@/Components/Footer.vue'
+    import CommentForm from '@/Components/CommentForm.vue'
     import { ref } from 'vue';
 
     const themesIsVisible = ref(true);
@@ -45,7 +46,14 @@
         </button>
 
         <ProfileThemes v-if="themesIsVisible" />
+
         <ProfileComments v-else />
+        <!-- <form class="profile__comment-form">
+            <label for="">Оставьте комментарий</label>
+            <textarea name="" id=""></textarea>
+        </form> -->
+        <!-- <CommentForm /> -->
+
         
     </div>
 

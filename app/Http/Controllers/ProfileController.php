@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Theme, Category, User};
+use App\Models\{Theme, Category, User, Comments};
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -21,12 +21,14 @@ class ProfileController extends Controller
 
     public function profileIndex($name) {
         #Валидация добавь
-        $user = User::where('name', $name)->first();
+        $user = User::where('name', $name)->with('comments')->first();
+        $comments = Comments::with('user')->where('user_id', $name)->get();
         return Inertia::render('Profile', [
             'themes' => Theme::where('user_id', $user->id)->get(),
             'user' => $user,
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
+            'comments' => $comments
             // 'user' => Auth::user(),
         ]);
     }
