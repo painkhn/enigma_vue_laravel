@@ -45,7 +45,8 @@
                 <div class="flex items-center gap-3">
                     <a href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Редактировать</a>
                     <!-- <a href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Удалить</a> -->
-                     <button @click="deleteComment(comment.id)" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Удалить</button>
+                    <button @click="deleteComment(comment.id)" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Удалить</button>
+                    <a href="#!" class="px-5 py-2 bg-transparent border border-black text-black rounded-md transition-all hover:bg-white">Пожаловаться</a>
                 </div>
             </div>
         </li>

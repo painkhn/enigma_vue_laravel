@@ -38,5 +38,9 @@ Route::controller(App\Http\Controllers\CommentsController::class)->group(functio
     // Route::get('/comment', 'index')->name('get_comment');
 });
 
+Route::controller(App\Http\Controllers\ComplaintController::class)->group(function() {
+    Route::get('/complaint', 'index')->name('complaint');
+});
+
 
 require __DIR__.'/auth.php';

@@ -28,4 +28,8 @@ class Theme extends Model
     {
         return $this->belongsTo(Comments::class);
     }
+    public function complaint()
+    {
+        return $this->belongsTo(Complaint::class);
+    }
 }
