@@ -40,12 +40,12 @@
 
         <li v-for="(comment, index) in props.comments" :key="comment.id">
             <div class="themesComments__list-item w-full p-5 rounded-md bg-gray-100 border-l-2 border-red-400 flex flex-col gap-3">
-                <p class="themesComments__list-item--username text-red-400 font-semibold text-lg">{{ comment.user.name }}</p>
+                <p class="themesComments__list-item--username text-red-400 font-semibold text-lg">{{ comment.user.name }} <span v-if="comment.user.is_admin == 1">- Администратор</span></p>
                 <p class="themesComments__list-item--username text-gray-600">{{ comment.content }}</p>
                 <div class="flex items-center gap-3">
                     <a href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Редактировать</a>
                     <!-- <a href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Удалить</a> -->
-                    <button @click="deleteComment(comment.id)" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Удалить</button>
+                    <button @click="deleteComment(comment.id)" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300" v-if="$page.props.auth.user.is_admin == 1">Удалить</button>
                     <a href="#!" class="px-5 py-2 bg-transparent border border-black text-black rounded-md transition-all hover:bg-white">Пожаловаться</a>
                 </div>
             </div>
