@@ -47,7 +47,7 @@
 
         <ul class="complaint__list flex flex-col gap-5" v-else>
             <li v-for="complaint in $page.props.complaints" :key="complaint.id">
-                <Link class="transition-all hover:text-red-400 px-4 rounded-md flex w-full bg-gray-200 py-3 text-base font-semibold hover:bg-gray-100 hover:border-l-2 hover:border-red-400">
+                <Link :href="`theme/${complaint.theme_id}`" class="transition-all hover:text-red-400 px-4 rounded-md flex w-full bg-gray-200 py-3 text-base font-semibold hover:bg-gray-100 hover:border-l-2 hover:border-red-400">
                     <span class="text-red-400 mr-2">{{ complaint.user.name }}:</span> {{ complaint.complaint }}
                 </Link>
             </li>
