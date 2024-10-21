@@ -2,6 +2,7 @@
     import Header from '@/Components/Header.vue'
     import { Head, Link, usePage } from '@inertiajs/vue3';
     import ComplaintForm from '@/Components/ComplaintForm.vue';
+    import { onMounted } from 'vue';
 
     const props = defineProps({
         canLogin: {
@@ -27,6 +28,9 @@
         }
     });
 
+    onMounted(() => {
+        console.log(props.complaints)
+    })
 </script>
 
 <template>
