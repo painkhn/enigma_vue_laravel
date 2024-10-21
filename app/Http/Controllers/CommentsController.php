@@ -36,6 +36,7 @@ class CommentsController extends Controller
         $array_request = $request->all();
         // $theme = Theme::first($request->theme_id);
         $theme = Theme::find($request->theme_id);
+        // dd($theme);
         $comment = Comments::create([
             'content' => $array_request['content'],
             'user_id' => Auth::id(),

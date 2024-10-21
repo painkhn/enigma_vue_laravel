@@ -39,10 +39,13 @@ class ComplaintController extends Controller
         $array_request = $request->all();
         // $theme = Theme::find($request->theme_id);
         // $comment = Comments::find($request->comments_id);
+        $theme = Theme::find($request->theme_id);
+        // dd($theme);
         $complaint = Complaint::create([
             // 'complaint' => $array_request['complaint'],
             'complaint' => $request->complaint,
             'user_id' => Auth::id(),
+            'theme_id' => $theme->id
             // 'theme_id' => $theme->id,
             // 'comment_id' => $comment->id,
         ]);

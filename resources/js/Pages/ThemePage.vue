@@ -5,7 +5,7 @@
     import ThemeCommentList from '@/Components/ThemeCommentList.vue';
     import CommentForm from '@/Components/CommentForm.vue';
     import { Head, Link, usePage } from '@inertiajs/vue3';
-    import theme from 'tailwindcss/defaultTheme';
+    import ComplaintForm from '@/Components/ComplaintForm.vue';
 
     const goBack = () => {
         window.history.back();
@@ -45,8 +45,20 @@
         },
         comments: {
             type: Object
-        }
+        },
+        complaint: {
+            type: Object
+        },
     });
+
+    const complainIsVisible = ref(false)
+
+    const complaintOpen = () => {
+        const compForm = document.getElementById('complaintForm')
+
+        // compForm.classList.remove('hidden')
+        complainIsVisible.value = !complainIsVisible.value
+    }
 
     onMounted(() => {
         console.log('Comments:', props.comments);
@@ -81,6 +93,12 @@
                 <hr class="border">
                 <li>
                     <Link :href="`/users/${$page.props.theme.user.name}`" class="text-red-400 text font-bold">{{$page.props.theme.user.name}}</Link>
+                </li>
+                <li>
+                    <button @click="complaintOpen" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">Пожаловаться</button>
+                </li>
+                <li v-if="complainIsVisible">
+                    <ComplaintForm id="complaintForm" :complaint="props.complaint" :theme="props.theme" />
                 </li>
                 <li>
                     <button v-if="$page.props.auth.user.is_admin == 1" @click="deleteTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
