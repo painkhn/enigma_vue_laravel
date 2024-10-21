@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Complaint;
+use App\Models\{Complaint, Theme, Category, User, Comments};
 use App\Http\Requests\StoreComplaintRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateComplaintRequest;
 use Inertia\Inertia;
 use Auth;
@@ -15,8 +16,10 @@ class ComplaintController extends Controller
      */
     public function index()
     {
+        $complaints = Complaint::with('user')->get();
         return Inertia::render('ComplaintPage', [
             'user' => Auth::user(),
+            'complaints' => $complaints,
         ]);
     }
 
@@ -31,9 +34,20 @@ class ComplaintController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreComplaintRequest $request)
+    public function store(request $request)
     {
-        //
+        $array_request = $request->all();
+        // $theme = Theme::find($request->theme_id);
+        // $comment = Comments::find($request->comments_id);
+        $complaint = Complaint::create([
+            // 'complaint' => $array_request['complaint'],
+            'complaint' => $request->complaint,
+            'user_id' => Auth::id(),
+            // 'theme_id' => $theme->id,
+            // 'comment_id' => $comment->id,
+        ]);
+
+        return response()->json($complaint, 201);
     }
 
     /**

@@ -17,7 +17,10 @@
             <hr class="border-gray-400 opacity-80 mb-2">
             <p class="profileInfo__info-email mb-2">{{ $page.props.user.email }}</p>
             <p class="profileInfo__info-age mb-2">{{ $page.props.user.age }} лет</p>
-            <Link :href="route('themeCreate')" class="transition-all hover:text-red-400 font-semibold" as="button" v-if="$page.props.auth.user.id == $page.props.user.id">Создать тему</Link>
+            <div class="flex flex-col items-start gap-2">
+                <Link :href="route('themeCreate')" class="transition-all hover:text-red-400 font-semibold" as="button" v-if="$page.props.auth.user.id == $page.props.user.id">Создать тему</Link>
+                <Link :href="route('complaints')" class="transition-all hover:text-red-400 font-semibold" v-if="$page.props.auth.user.id == $page.props.user.id && $page.props.auth.user.is_admin == 1">Жалобы</Link>
+            </div>
         </div>
     </div>
 </template>
