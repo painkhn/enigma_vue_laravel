@@ -63,6 +63,7 @@ class AuthenticatedSessionController extends Controller
     public function yandexRedirect() // принимаем возвращаемые данные и работаем с ними
     {
         $user = Socialite::driver('yandex')->user();
+        dd($user);
 
         $user = User::firstOrCreate([ // используем firstOrCreate для проверки есть ли такие пользователи в нашей БД
             'email' => $user->email

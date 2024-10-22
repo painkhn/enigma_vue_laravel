@@ -70,9 +70,7 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="mt-4 block">
-                <button type="submit" class="w-full py-2 border border-black rounded-md transition-all hover:bg-gray-100">ЯНДЕКС</button>
-            </div>
+            
 
             <div class="mt-4 block">
                 <label class="flex items-center">
@@ -103,6 +101,11 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+
+        <div class="mt-4 block">
+            <!-- <button type="submit" class="w-full py-2 border border-black rounded-md transition-all hover:bg-gray-100" :href="route('yandex')">ЯНДЕКС</button> -->
+             <Link :href="route('yandex')" class="w-full py-2 border border-black rounded-md transition-all hover:bg-gray-100 flex justify-center">ЯНДЕКС</Link>
+        </div>
         
         <Footer />
     </GuestLayout>
