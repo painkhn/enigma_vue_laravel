@@ -82,6 +82,7 @@ class ComplaintController extends Controller
      */
     public function destroy(Complaint $complaint)
     {
-        //
+        $complaint->delete();
+        return response()->json(['redirect' => '/']);
     }
 }

@@ -41,6 +41,7 @@ Route::controller(App\Http\Controllers\CommentsController::class)->group(functio
 Route::controller(App\Http\Controllers\ComplaintController::class)->group(function() {
     Route::get('/complaint', 'index')->name('complaints');
     Route::post('/complaint/new', 'store')->name('new_complaint');
+    Route::delete('/complaint/delete/{complaint}', 'destroy')->name('delete_complaint');
 });
 
 

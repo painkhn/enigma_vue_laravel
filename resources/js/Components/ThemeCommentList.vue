@@ -1,6 +1,6 @@
 <script setup>
     // import ThemeComment from './ThemeComment.vue';
-    import { ref, onMounted } from 'vue';
+    import { ref, onMounted, defineProps } from 'vue';
 
     const comments = ref('')
 
