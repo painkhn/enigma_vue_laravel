@@ -45,4 +45,10 @@ Route::controller(App\Http\Controllers\ComplaintController::class)->group(functi
 });
 
 
+
+Route::controller(App\Http\Controllers\Auth\AuthenticatedSessionController::class)->group(function() {
+    Route::get('login/yandex', 'yandex')->name('yandex');
+    Route::get('login/yandex/redirect', 'yandexRedirect')->name('yandexRedirect');
+});
+
 require __DIR__.'/auth.php';

@@ -71,6 +71,10 @@ const submit = () => {
             </div>
 
             <div class="mt-4 block">
+                <button type="submit" class="w-full py-2 border border-black rounded-md transition-all hover:bg-gray-100">ЯНДЕКС</button>
+            </div>
+
+            <div class="mt-4 block">
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
                     <span class="ms-2 text-sm text-gray-600"
@@ -78,6 +82,8 @@ const submit = () => {
                     >
                 </label>
             </div>
+
+           
 
             <div class="mt-4 flex items-center justify-end">
                 <Link
