@@ -10,6 +10,7 @@
 
     const content = ref('');
     console.log('Received props:', props);
+    
     const createComment = async () => {
         try {
             console.log(content.value);

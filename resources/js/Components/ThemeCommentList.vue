@@ -11,7 +11,28 @@
         user: {
             type: Object,
         },
+        theme: {
+            type: Object,
+        },
     })
+
+    const content = ref('');
+
+    const updateComment = async (commentId, event) => {
+        try {
+            const response = await axios.patch(
+            route('update_comment', { id: commentId }),
+            {
+                content: content.value,
+                // theme_id: props.theme.id 
+            }
+            );
+            console.log('Успешно', response.data.message);
+            // location.reload(); // Refresh the page to update comments
+        } catch (error) {
+            console.log(error, commentId);
+        }
+    };
 
     const deleteComment = async (commentId) => {
         try {
@@ -26,6 +47,12 @@
         } catch (error) {
             console.log(error, commentId)
         }
+    }
+
+    const commentEditIsVisible = ref(false)
+
+    const commentEditOpen = () => {
+        commentEditIsVisible.value = !commentEditIsVisible.value
     }
 
     onMounted(() => {
@@ -43,11 +70,17 @@
                 <p class="themesComments__list-item--username text-red-400 font-semibold text-lg">{{ comment.user.name }} <span v-if="comment.user.is_admin == 1">- Администратор</span></p>
                 <p class="themesComments__list-item--username text-gray-600">{{ comment.content }}</p>
                 <div class="flex items-center gap-3">
-                    <a href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Редактировать</a>
+                    <!-- <a href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Редактировать</a> -->
+                    <button @click="commentEditOpen" href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Редактировать</button>
                     <!-- <a href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Удалить</a> -->
                     <button @click="deleteComment(comment.id)" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300" v-if="$page.props.auth.user.is_admin == 1">Удалить</button>
                     <a href="#!" class="px-5 py-2 bg-transparent border border-black text-black rounded-md transition-all hover:bg-white">Пожаловаться</a>
                 </div>
+                <form @submit.prevent="updateComment(comment.id, $event)" v-if="commentEditIsVisible" action="" class="comment__edit-form flex flex-col">
+                    <label for="" class="mb-1">Введите новый комментарий</label>
+                    <input type="text" class="w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
+                    <button type="submit" class="w-full h-10 font-semibold bg-red-400 rounded-md transition-all hover:bg-red-300 text-white">Отправить</button>
+                </form>
             </div>
         </li>
     </ul>
