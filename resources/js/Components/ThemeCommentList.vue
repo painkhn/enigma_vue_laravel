@@ -18,15 +18,19 @@
 
     const content = ref('');
 
-    const updateComment = async (commentId, event) => {
+    const updateComment = async (commentId) => {
         try {
             const response = await axios.patch(
             route('update_comment', { id: commentId }),
-            {
-                content: content.value,
-                // theme_id: props.theme.id 
-            }
+                {
+                    content: content.value,
+                    // theme_id: props.theme.id 
+                    'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
+
+                }
             );
+            location.reload()
+
             console.log('Успешно', response.data.message);
             // location.reload(); // Refresh the page to update comments
         } catch (error) {
@@ -78,7 +82,7 @@
                 </div>
                 <form @submit.prevent="updateComment(comment.id, $event)" v-if="commentEditIsVisible" action="" class="comment__edit-form flex flex-col">
                     <label for="" class="mb-1">Введите новый комментарий</label>
-                    <input type="text" class="w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
+                    <input v-model="content" type="text" class="w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
                     <button type="submit" class="w-full h-10 font-semibold bg-red-400 rounded-md transition-all hover:bg-red-300 text-white">Отправить</button>
                 </form>
             </div>

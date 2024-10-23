@@ -65,21 +65,20 @@ class CommentsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comments $comment)
+    public function update(Request $request, $comment)
     {
         $request->validate([
             'content' => 'required',
         ]);
-
-        $array_request = $request->all();
+        // $array_request = $request->all();
         // $theme = Theme::first($request->theme_id);
-        $theme = Theme::find($request->theme_id);
+        // $theme = Theme::find($request->theme_id);
 
         // $comment->update(['content' => $request->content]);
-        $comment = Comments::update([
-            'content' => $array_request['content'],
-            'user_id' => Auth::id(),
-            'theme_id' => $theme->id
+        $comment = Comments::where('id', $comment)->update([
+            'content' => $request->content,
+            // 'user_id' => Auth::id(),
+            // 'theme_id' => $theme->id
         ]);
 
         return response()->json($comment);
