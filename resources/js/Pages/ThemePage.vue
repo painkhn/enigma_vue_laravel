@@ -110,7 +110,7 @@
                     </button>
                 </li>
                 <li>
-                    <button @click="downloadTheme($page.props.theme.id)" class="px-5 py-2 bg-blue-400 rounded-md text-white font-semibold transition-all hover:bg-blue-300">
+                    <button @click="downloadTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
                         Скачать тему
                     </button>
                 </li>
