@@ -60,6 +60,10 @@
         complainIsVisible.value = !complainIsVisible.value
     }
 
+    const downloadTheme = (themeId) => {
+        window.open(route('download_theme', { id: themeId }), '_blank');
+    }
+
     onMounted(() => {
         console.log('Comments:', props.comments);
     })
@@ -103,6 +107,11 @@
                 <li>
                     <button v-if="$page.props.auth.user.is_admin == 1" @click="deleteTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
                         Удалить тему
+                    </button>
+                </li>
+                <li>
+                    <button @click="downloadTheme($page.props.theme.id)" class="px-5 py-2 bg-blue-400 rounded-md text-white font-semibold transition-all hover:bg-blue-300">
+                        Скачать тему
                     </button>
                 </li>
             </ul>

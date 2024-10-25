@@ -130,4 +130,22 @@ class ThemeController extends Controller
         // return Inertia::render('Welcome')
         return $this->index($theme=$themes);
     }
+
+    public function download($id)
+    {
+        $theme = Theme::with('user')->findOrFail($id);
+
+        $content = "Название: {$theme->name}\n";
+        $content .= "Контент: {$theme->content}\n";
+        $content .= "Дата создания: {$theme->created_at}\n";
+        $content .= "Создатель: {$theme->user->name}\n";
+
+        // Устанавливаем заголовки для скачивания файла
+        return response()->stream(function () use ($content) {
+            echo $content;
+        }, 200, [
+            'Content-Type' => 'text/plain',
+            'Content-Disposition' => 'attachment; filename="theme.txt"',
+        ]);
+    }
 }

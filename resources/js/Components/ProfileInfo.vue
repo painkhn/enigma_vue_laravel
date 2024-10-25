@@ -1,10 +1,58 @@
 <script setup>
     import { Link } from '@inertiajs/vue3'
+    import { ref } from 'vue';
+
+    const avatarFile = ref(null);
+
+    const handleFileChange = (event) => {
+        avatarFile.value = event.target.files[0];
+    };
+
+    const submitAvatarForm = async () => {
+        if (!avatarFile.value) {
+            alert('Пожалуйста, выберите файл для загрузки.');
+            return;
+        }
+
+        const formData = new FormData();
+            formData.append('avatar_change', avatarFile.value);
+
+            try {
+                await axios.patch(route('new_avatar'), formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                // Обработка успешного изменения аватарки
+                avatarFile.value = null; // Сбросить выбранный файл
+                location.reload(); // Перезагрузить страницу, чтобы обновить аватар
+            } catch (error) {
+                // Обработка ошибок валидации
+                console.error('Произошла ошибка при загрузке аватарки:', error.response.data.errors);
+                // alert('Произошла ошибка при загрузке аватарки: ' + error.response.data.errors.avatar_change.join(', '));
+            }
+    }
+
+    const downloadProfile = (userName) => {
+        window.open(route('download_profile', { name: userName }), '_blank');
+    }
+
 </script>
 
 <template>
     <div class="profileInfo flex gap-5">
-        <img src="../../../public/img/avatar_default.jpg" alt="Аватарка" class="profileInfo__avatar max-w-40">
+        <img :src="$page.props.user.avatar || '/img/avatar_default.jpg'" alt="Аватарка" class="profileInfo__avatar w-40 h-40">
+        <!-- <form id="avatar-file-form" @submit.prevent="submitAvatarForm">
+            <label class="flex items-center justify-center border-2 px-3 py-2 border-primary cursor-pointer mb-5 rounded-md hovered" for="avatar_change">
+                <input @change="handleFileChange" class="hidden" type="file" name="avatar_change" id="avatar_change" accept="image/*">
+                <span class="text-base font-bold color-primary transition-2s">Сменить аватарку</span>
+            </label>
+            <button @click="submitAvatarForm" type="submit" class="bg-red-400 text-white px-4 py-2 rounded">Сохранить</button>
+        </form> -->
+        <!-- <div>
+            <input type="file" name="avatar_change" @change="handleFileChange" accept="image/*">
+            <button @click="submitAvatarForm">Загрузить аватар</button>
+        </div> -->
         <div class="profileInfo__info w-full mb-2">
             <div class="flex items-center justify-between">
                 <h3 class="profileinfo__info-username uppercase text-red-400 font-bold mb-2">{{ $page.props.user.name }}</h3>
@@ -20,6 +68,7 @@
             <div class="flex flex-col items-start gap-2">
                 <Link :href="route('themeCreate')" class="transition-all hover:text-red-400 font-semibold" as="button" v-if="$page.props.auth.user.id == $page.props.user.id">Создать тему</Link>
                 <Link :href="route('complaints')" class="transition-all hover:text-red-400 font-semibold" v-if="$page.props.auth.user.id == $page.props.user.id && $page.props.auth.user.is_admin == 1">Жалобы</Link>
+                <button @click="downloadProfile($page.props.user.name)" class="transition-all hover:text-red-400 font-semibold">Скачать информацию профиля</button>
             </div>
         </div>
     </div>

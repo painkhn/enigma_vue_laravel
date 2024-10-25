@@ -32,6 +32,37 @@ class ProfileController extends Controller
             // 'user' => Auth::user(),
         ]);
     }
+
+    public function updateAvatar(Request $request)
+    {
+        dd($request->all());
+
+        $validated = $request->validate([
+            'avatar_change' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+        ]);
+
+        // dd($request->all());
+        
+        $user = Auth::user();
+        $avatarPath = public_path($user->avatar);
+    
+        // Удаляем старую аватарку, если она существует
+        if ($user->avatar && file_exists($avatarPath)) {
+            unlink($avatarPath);
+        }
+    
+        // Сохраняем новую аватарку
+        $name = time() . "." . $request->file('avatar_change')->extension();
+        $destination = 'avatars'; // Путь для хранения аватарок
+        $path = $request->file('avatar_change')->storeAs($destination, $name, 'public');
+    
+        // Обновляем путь к аватарке в базе данных
+        $user->update([
+            'avatar' => 'storage/' . $destination . '/' . $name
+        ]);
+    
+        return redirect()->back()->with('success', 'Аватарка успешно изменена!');
+    }
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
@@ -75,5 +106,22 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function download($name)
+    {
+        $user = User::where('name', $name)->firstOrFail();
+
+        $content = "Имя: {$user->name}\n";
+        $content .= "Email: {$user->email}\n";
+        $content .= "Возраст: {$user->age} лет\n";
+
+        // Устанавливаем заголовки для скачивания файла
+        return response()->stream(function () use ($content) {
+            echo $content;
+        }, 200, [
+            'Content-Type' => 'text/plain',
+            'Content-Disposition' => 'attachment; filename="profile.txt"',
+        ]);
     }
 }

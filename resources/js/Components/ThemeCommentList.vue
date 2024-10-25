@@ -26,7 +26,6 @@
                     content: content.value,
                     // theme_id: props.theme.id 
                     'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
-
                 }
             );
             location.reload()
