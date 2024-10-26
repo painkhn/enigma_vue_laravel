@@ -57,8 +57,8 @@ class ProfileController extends Controller
         $path = $request->file('avatar_change')->storeAs($destination, $name, 'public');
     
         // Обновляем путь к аватарке в базе данных
-        $user->update([
-            'avatar' => '/storage/avatars' . '/' . $name
+        $user->where('id', $user->id)->update([
+            'avatar' => $path
         ]);
     
         return redirect()->back()->with('success', 'Аватарка успешно изменена!');
