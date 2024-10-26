@@ -15,22 +15,22 @@
         }
 
         const formData = new FormData();
-            formData.append('avatar_change', avatarFile.value);
+        formData.append('avatar_change', avatarFile.value);
 
-            try {
-                await axios.patch(route('new_avatar'), formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
-                // Обработка успешного изменения аватарки
-                avatarFile.value = null; // Сбросить выбранный файл
-                location.reload(); // Перезагрузить страницу, чтобы обновить аватар
-            } catch (error) {
-                // Обработка ошибок валидации
-                console.error('Произошла ошибка при загрузке аватарки:', error.response.data.errors);
-                // alert('Произошла ошибка при загрузке аватарки: ' + error.response.data.errors.avatar_change.join(', '));
-            }
+        try {
+            await axios.post(route('new_avatar'), formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            // Обработка успешного изменения аватарки
+            avatarFile.value = null; // Сбросить выбранный файл
+            // location.reload(); // Перезагрузить страницу, чтобы обновить аватар
+        } catch (error) {
+            // Обработка ошибок валидации
+            console.error('Произошла ошибка при загрузке аватарки:', error.response.data.errors);
+            // alert('Произошла ошибка при загрузке аватарки: ' + error.response.data.errors.avatar_change.join(', '));
+        }
     }
 
     const downloadProfile = (userName) => {

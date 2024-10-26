@@ -35,7 +35,7 @@ class ProfileController extends Controller
 
     public function updateAvatar(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
 
         $validated = $request->validate([
             'avatar_change' => 'required|image|mimes:jpg,png,jpeg|max:2048'
@@ -58,7 +58,7 @@ class ProfileController extends Controller
     
         // Обновляем путь к аватарке в базе данных
         $user->update([
-            'avatar' => 'storage/' . $destination . '/' . $name
+            'avatar' => '/storage/avatars' . $destination . '/' . $name
         ]);
     
         return redirect()->back()->with('success', 'Аватарка успешно изменена!');

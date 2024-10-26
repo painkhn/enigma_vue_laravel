@@ -25,7 +25,7 @@ Route::controller(App\Http\Controllers\ProfileController::class)->group(function
         Route::get('/profile/edit', 'edit')->name('profile.edit');
         Route::patch('/profile/update',  'update')->name('profile.update');
         Route::delete('/profile/destroy', 'destroy')->name('profile.destroy');
-        Route::patch('/profile/new_avatar', 'updateAvatar')->name('new_avatar');
+        Route::post('/profile/new_avatar', 'updateAvatar')->name('new_avatar');
         Route::get('/profile/download/{name}', 'download')->name('download_profile');
     });
 });
