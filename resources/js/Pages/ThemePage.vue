@@ -30,6 +30,27 @@
         }
     }
 
+    const title = ref('');
+    const content = ref('');
+
+    const updateTheme = async (themeId) => {
+        try {
+            const response = await axios.patch(
+            route('update_theme', { id: themeId }),
+                {
+                    title: title.value,
+                    content: content.value,
+                    // 'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
+                }
+            );
+            location.reload()
+
+            console.log('Успешно', response.data.message);
+        } catch (error) {
+            console.log(error, themeId);
+        }
+    };
+
     const props = defineProps({
         canLogin: {
             type: Boolean,
@@ -62,6 +83,12 @@
 
     const downloadTheme = (themeId) => {
         window.open(route('download_theme', { id: themeId }), '_blank');
+    }
+
+    const themeEditIsVisible = ref(false)
+
+    const themeEditOpen = () => {
+        themeEditIsVisible.value = !themeEditIsVisible.value
     }
 
     onMounted(() => {
@@ -103,6 +130,19 @@
                 </li>
                 <li v-if="complainIsVisible">
                     <ComplaintForm id="complaintForm" :complaint="props.complaint" :theme="props.theme" />
+                </li>
+                <li>
+                    <button @click="themeEditOpen" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
+                        Редактировать тему
+                    </button>
+                </li>
+                <li v-if="themeEditIsVisible">
+                    <form action="" @submit.prevent="updateTheme(theme.id, $event)">
+                        <label for="" class="mb-1">Редактировать тему</label>
+                        <input v-model="title" placeholder="Название темы"type="text" class="w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
+                        <input v-model="content" placeholder="Контент"type="text" class="w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
+                        <button type="submit" class="w-full h-10 font-semibold bg-red-400 rounded-md transition-all hover:bg-red-300 text-white">Отправить</button>
+                    </form>
                 </li>
                 <li>
                     <button v-if="$page.props.auth.user.is_admin == 1" @click="deleteTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">

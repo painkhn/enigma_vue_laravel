@@ -99,11 +99,47 @@ class ThemeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateThemeRequest $request, Theme $theme)
-    {
-        $theme->update($request->validated());
+    // public function update(UpdateThemeRequest $request, $theme)
+    // {
+    //     // $theme->update($request->validated());
 
-        return response()->json($theme);
+    //     // return response()->json($theme);
+
+    //     $request->validate([
+    //         'name' => $request->title,
+    //         'content' => 'required',
+    //     ]);
+    //     $theme = Theme::where('id', $theme)->update([
+    //         'name' => $request->title,
+    //         'content' => $request->content,
+    //     ]);
+
+    //     return response()->json($theme);
+    // }
+
+    public function update(Request $request, $id)
+{
+    // Validate incoming request
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        // Find the theme
+        $theme = Theme::findOrFail($id);
+
+        // Check if user can update this theme
+        if ($theme->user_id !== auth()->id() && !auth()->user()->is_admin) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        // Update theme
+        // $theme->update($request->only('title', 'content'));
+        $theme->name = $request->input('title');
+        $theme->content = $request->input('content');
+        $theme->save();
+
+        return response()->json(['message' => 'Theme updated successfully']);
     }
 
     /**

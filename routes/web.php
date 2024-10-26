@@ -14,6 +14,7 @@ Route::controller(App\Http\Controllers\ThemeController::class)->group(function (
     Route::get('/theme/{id}', 'show')->name('themeShow');
     Route::post('/theme/new',  'store')->name('new_theme');
     Route::delete('/theme/delete/{theme}',  'destroy')->name('delete_theme');
+    Route::patch('/theme/update/{theme}',  'update')->name('update_theme');
     Route::post('/search', 'search')->name('search');
     Route::get('/category/{id}', 'filterByCategory')->name('filter_by_category');
     Route::get('/theme/download/{id}', 'download')->name('download_theme');

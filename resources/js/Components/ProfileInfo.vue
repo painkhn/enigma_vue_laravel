@@ -25,6 +25,7 @@
             });
             // Обработка успешного изменения аватарки
             avatarFile.value = null; // Сбросить выбранный файл
+            // console.log('аватарка успешно изменена')
             // location.reload(); // Перезагрузить страницу, чтобы обновить аватар
         } catch (error) {
             // Обработка ошибок валидации
@@ -47,7 +48,7 @@
                 <input @change="handleFileChange" class="hidden" type="file" name="avatar_change" id="avatar_change" accept="image/*">
                 <span class="text-base font-bold color-primary transition-2s">Сменить аватарку</span>
             </label>
-            <button @click="submitAvatarForm" type="submit" class="bg-red-400 text-white px-4 py-2 rounded">Сохранить</button>
+            <button type="submit" class="bg-red-400 text-white px-4 py-2 rounded">Сохранить</button>
         </form>
         <!-- <div>
             <input type="file" name="avatar_change" @change="handleFileChange" accept="image/*">

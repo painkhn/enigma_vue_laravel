@@ -70,15 +70,8 @@ class CommentsController extends Controller
         $request->validate([
             'content' => 'required',
         ]);
-        // $array_request = $request->all();
-        // $theme = Theme::first($request->theme_id);
-        // $theme = Theme::find($request->theme_id);
-
-        // $comment->update(['content' => $request->content]);
         $comment = Comments::where('id', $comment)->update([
             'content' => $request->content,
-            // 'user_id' => Auth::id(),
-            // 'theme_id' => $theme->id
         ]);
 
         return response()->json($comment);
