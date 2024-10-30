@@ -42,7 +42,7 @@
 
 <template>
     <div class="profileInfo flex gap-5">
-        <img :src="`/storage/` + $page.props.user.avatar || '/img/avatar_default.jpg'" alt="Аватарка" encType="multipart/form-data" class="profileInfo__avatar w-40 h-40">
+        <img :src="`/storage/` + $page.props.user.avatar || '/img/avatar_default.jpg'" alt="Аватарка" encType="multipart/form-data" class="profileInfo__avatar w-40 h-40 rounded border-slate-200">
         <form id="avatar-file-form" @submit.prevent="submitAvatarForm">
             <label class="flex items-center justify-center border-2 px-3 py-2 border-primary cursor-pointer mb-5 rounded-md hovered" for="avatar_change">
                 <input @change="handleFileChange" class="hidden" type="file" name="avatar_change" id="avatar_change" accept="image/*">

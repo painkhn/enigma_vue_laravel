@@ -68,7 +68,7 @@
     />
 
     <main class="selection:bg-[#f87171] selection:text-white">
-        <div class="max-w-7xl w-full h-auto bg-white mx-auto my-0 p-10 shadow-md mt-10 rounded-md">
+        <div class="max-w-7xl w-full h-auto bg-white mx-auto my-0 p-10 border border-slate-200 mt-10 rounded-xl">
             <h1 class="themeCreate__title text-red-400 text-xl font-bold text-center mb-5">Создать тему</h1>
             <form @submit.prevent="createTheme" method="POST" class="themeCreate__form flex flex-col gap-3">
                 <div class="themeCreate__form-item flex flex-col gap-1">

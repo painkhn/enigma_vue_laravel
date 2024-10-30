@@ -37,7 +37,7 @@
         :user="props.user"
     />
 
-    <div class="max-w-7xl h-auto p-5 mx-auto my-0 bg-white shadow-lg mt-10 selection:bg-[#f87171] selection:text-white rounded-md">
+    <div class="max-w-7xl h-auto p-5 mx-auto my-0 bg-white mt-10 selection:bg-[#f87171] selection:text-white rounded-xl border border-slate-200">
         <ProfileInfo />
         <hr class="border border-red-400 mb-5">
         <button @click="openThemes" class="px-5 py-3 bg-red-400 rounded-md text-white text-lg font-medium transition-all hover:bg-red-300">

@@ -91,6 +91,22 @@
         themeEditIsVisible.value = !themeEditIsVisible.value
     }
 
+    const copyContent = async () => {
+        try {
+            const textElement = document.querySelector('.textForCopy');
+            if (textElement) {
+                const text = textElement.textContent;
+                await navigator.clipboard.writeText(text);
+                alert('Текст успешно скопирован')
+                console.log('Content copied to clipboard');
+            } else {
+                console.error('Text element not found');
+            }
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
+
     onMounted(() => {
         console.log('Comments:', props.comments);
     })
@@ -106,14 +122,14 @@
     />
 
     <main>
-        <div class="themesInfo max-w-7xl rounded-md w-full mx-auto my-0 h-auto p-5 bg-white shadow-md mt-10 selection:bg-[#f87171] selection:text-white mb-10">
+        <div class="themesInfo max-w-7xl rounded-xl w-full mx-auto my-0 h-auto p-5 bg-white border border-slate-200 mt-10 selection:bg-[#f87171] selection:text-white mb-10">
             <button @click="goBack" class="themesInfo__back text-gray-600 transition-all hover:text-red-400">Вернуться назад</button>
             <ul class="themesInfo__list flex flex-col gap-3 mt-3">
-                <li>
-                    <p class="text-red-400 font-semibold text-xl">{{ $page.props.theme.name }}</p>
+                <li class="mb-2">
+                    <p @click="copyContent()" class="textForCopy text-red-400 font-semibold transition-all text-xl w-full py-2 px-4 bg-slate-100 rounded cursor-pointer hover:border-l-2 hover:border-red-400">{{ $page.props.theme.name }}</p>
                 </li>
-                <li>
-                    <p class="text-gray-600 text-md">{{ $page.props.theme.content }}</p>
+                <li class="mb-4">
+                    <p class="text-gray-600 text-md text-lg">{{ $page.props.theme.content }}</p>
                 </li>
                 <li>
                     <p class="text-gray-400 text-sm">{{ formatDate($page.props.theme.created_at) }}</p>
@@ -138,9 +154,12 @@
                 </li>
                 <li v-if="themeEditIsVisible">
                     <form action="" @submit.prevent="updateTheme(theme.id, $event)">
-                        <label for="" class="mb-1">Редактировать тему</label>
-                        <input v-model="title" placeholder="Название темы"type="text" class="w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
-                        <input v-model="content" placeholder="Контент"type="text" class="w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
+                        <label for="font-semibold font-gray-600">Редактировать тему</label>
+                        <input v-model="title" placeholder="Название темы" type="text" class="w-full mt-1 h-10 mb-2 placeholder:text-gray-300 border-gray-400 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
+                        <!-- <input placeholder="Контент" type="text" class="w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400"> -->
+                        <textarea v-model="content" name="" id="" placeholder="Контент" class="text-gray-600 placeholder:text-gray-300 w-full h-40 rounded border-gray-400 border transition-all focus:border-red-400 focus:ring-red-400">
+
+                        </textarea>
                         <button type="submit" class="w-full h-10 font-semibold bg-red-400 rounded-md transition-all hover:bg-red-300 text-white">Отправить</button>
                     </form>
                 </li>

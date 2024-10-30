@@ -27,7 +27,7 @@
 </script>
 
 <template>
-    <div class="main__themes w-8/12 h-auto p-10 rounded-xl bg-white dark:bg-zinc-800 shadow-xl">
+    <div class="main__themes w-full h-auto p-8 rounded-r-xl rounded-b-xl bg-white dark:bg-zinc-800 border border-slate-200">
         <h2 class="main__themes-title text-red-400 font-bold text-2xl mb-5">Темы</h2>
         <form @submit.prevent="searchThemes" method="POST" class="header__search-form flex items-center mb-5">
             <input v-model="word" @input="searchWord" type="search" name="word" id="" class="header__search-input w-full dark:bg-zinc-800 bg-white dark:focus:bg-zinc-700 text-gray-800 outline-none px-4 h-8 rounded-md focus:ring-1 focus:ring-red-400 focus:ring-offset-red-400 focus:ring-offset-0 transition-all border focus:border-red-400 focus:outline-none dark:border-red-400 focus:shadow-md dark:focus:shadow-black" placeholder="Поиск...">
@@ -37,7 +37,7 @@
         </form>
         <ul class="main__themes-list flex flex-col gap-3 text-gray-600 dark:text-white" v-if="searchResults.length > 0">
             <li v-for="theme in searchResults" :key="theme.id">
-                <Link :href="route('themeShow', { id: theme.id })"  class="transition-all hover:text-red-400 px-4 rounded-md flex w-full bg-gray-200 py-2 text-base font-semibold hover:bg-gray-100 hover:border-l-2 hover:border-red-400">
+                <Link :href="route('themeShow', { id: theme.id })"  class="transition-all hover:text-red-400 px-4 rounded-md flex w-full bg-gray-100 py-2 text-base font-semibold hover:border-l-2 hover:border-red-400">
                     {{ theme.name }}
                 </Link>
             </li>
@@ -45,7 +45,7 @@
 
         <ul class="main__themes-list flex flex-col gap-3 text-gray-600 dark:text-white" v-else>
             <li v-for="theme in $page.props.themes" :key="theme.id">
-                <Link :href="route('themeShow', { id: theme.id })"  class="transition-all hover:text-red-400 px-4 rounded-md flex w-full bg-gray-200 py-2 text-base font-semibold hover:bg-gray-100 hover:border-l-2 hover:border-red-400">{{ theme.name }}</Link>
+                <Link :href="route('themeShow', { id: theme.id })"  class="transition-all hover:text-red-400 px-4 rounded-md flex w-full bg-gray-100 py-2 text-base font-semibold hover:bg-gray-100 hover:border-l-2 hover:border-red-400">{{ theme.name }}</Link>
             </li>
         </ul>
     </div>
