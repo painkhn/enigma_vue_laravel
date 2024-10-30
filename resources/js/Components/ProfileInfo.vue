@@ -2,38 +2,6 @@
     import { Link } from '@inertiajs/vue3'
     import { ref } from 'vue';
 
-    const avatarFile = ref(null);
-
-    const handleFileChange = (event) => {
-        avatarFile.value = event.target.files[0];
-    };
-
-    const submitAvatarForm = async () => {
-        if (!avatarFile.value) {
-            alert('Пожалуйста, выберите файл для загрузки.');
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('avatar_change', avatarFile.value);
-
-        try {
-            await axios.post(route('new_avatar'), formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            // Обработка успешного изменения аватарки
-            avatarFile.value = null; // Сбросить выбранный файл
-            // console.log('аватарка успешно изменена')
-            location.reload(); // Перезагрузить страницу, чтобы обновить аватар
-        } catch (error) {
-            // Обработка ошибок валидации
-            console.error('Произошла ошибка при загрузке аватарки:', error.response.data.errors);
-            // alert('Произошла ошибка при загрузке аватарки: ' + error.response.data.errors.avatar_change.join(', '));
-        }
-    }
-
     const downloadProfile = (userName) => {
         window.open(route('download_profile', { name: userName }), '_blank');
     }
@@ -43,13 +11,7 @@
 <template>
     <div class="profileInfo flex gap-5">
         <img :src="`/storage/` + $page.props.user.avatar || '/img/avatar_default.jpg'" alt="Аватарка" encType="multipart/form-data" class="profileInfo__avatar w-40 h-40 rounded border-slate-200">
-        <form id="avatar-file-form" @submit.prevent="submitAvatarForm">
-            <label class="flex items-center justify-center border-2 px-3 py-2 border-primary cursor-pointer mb-5 rounded-md hovered" for="avatar_change">
-                <input @change="handleFileChange" class="hidden" type="file" name="avatar_change" id="avatar_change" accept="image/*">
-                <span class="text-base font-bold color-primary transition-2s">Сменить аватарку</span>
-            </label>
-            <button type="submit" class="bg-red-400 text-white px-4 py-2 rounded">Сохранить</button>
-        </form>
+        
         <!-- <div>
             <input type="file" name="avatar_change" @change="handleFileChange" accept="image/*">
             <button @click="submitAvatarForm">Загрузить аватар</button>

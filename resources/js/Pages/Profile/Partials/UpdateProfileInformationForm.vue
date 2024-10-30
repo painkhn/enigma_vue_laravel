@@ -20,6 +20,8 @@ const form = useForm({
     name: user.name,
     email: user.email,
 });
+
+
 </script>
 
 <template>
@@ -89,6 +91,8 @@ const form = useForm({
                     A new verification link has been sent to your email address.
                 </div>
             </div>
+
+            
 
             <div class="flex items-center gap-4">
                 <PrimaryButton :disabled="form.processing">Сохранить</PrimaryButton>
