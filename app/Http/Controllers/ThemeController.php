@@ -56,7 +56,14 @@ class ThemeController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->validate([
+        //     'title' => 'required|string|max:255',
+        //     'content' => 'required|string',
+        //     'category_id' => 'required|number|min:1'
+        // ]);
+
         $array_request = $request->all();
+        
         $theme = Theme::create([
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),

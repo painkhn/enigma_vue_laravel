@@ -35,6 +35,8 @@ class RegisteredUserController extends Controller
             'age' => 'required|string|max:3',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'password.confirmed' => "Пароли не совпадают"
         ]);
 
         $user = User::create([
