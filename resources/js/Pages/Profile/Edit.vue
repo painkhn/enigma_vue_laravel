@@ -55,7 +55,7 @@ const submitAvatarForm = async () => {
         <div class="py-12">
             <div class="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
                 <div
-                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8"
+                    class="dark:bg-zinc-700 bg-white p-4 shadow sm:rounded-lg sm:p-8"
                 >
                     <UpdateProfileInformationForm
                         :must-verify-email="mustVerifyEmail"
@@ -65,19 +65,19 @@ const submitAvatarForm = async () => {
                 </div>
 
                 <div
-                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8"
+                    class="dark:bg-zinc-700 bg-white p-4 shadow sm:rounded-lg sm:p-8"
                 >
-                    <h2 class="text-lg font-medium text-gray-900">
+                    <h2 class="text-lg font-medium text-gray-900 dark:text-white">
                         Изменить аватарку
                     </h2>
         
-                    <p class="mt-1 text-sm text-gray-600">
+                    <p class="mt-1 text-sm text-gray-600 dark:text-white/90">
                         Введите новую аватарку, которая будет отображаться в вашем профиле
                     </p>
                     <form id="avatar-file-form" @submit.prevent="submitAvatarForm" class="mt-5">
                         <label class="flex items-center justify-center transition-all border-2 px-3 py-2 border-primary cursor-pointer w-1/2 mb-5 rounded-md hover:border-red-400" for="avatar_change">
                             <input @change="handleFileChange" class="hidden" type="file" name="avatar_change" id="avatar_change" accept="image/*">
-                            <span class="text-base text-gray-600 font-semibold">Сменить аватарку</span>
+                            <span class="text-base text-gray-600 dark:text-white font-semibold">Сменить аватарку</span>
                         </label>
                         <button type="submit" class="bg-red-400 transition-all text-white px-4 py-2 hover:bg-red-300 rounded-md uppercase text-xs font-semibold tracking-widest">Сохранить</button>
                     </form>
@@ -86,13 +86,13 @@ const submitAvatarForm = async () => {
                 
 
                 <div
-                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8"
+                    class="bg-white dark:bg-zinc-700 p-4 shadow sm:rounded-lg sm:p-8"
                 >
                     <UpdatePasswordForm class="max-w-xl" />
                 </div>
 
                 <div
-                    class="bg-white p-4 shadow sm:rounded-lg sm:p-8"
+                    class="bg-white dark:bg-zinc-700 p-4 shadow sm:rounded-lg sm:p-8"
                 >
                     <DeleteUserForm class="max-w-xl" />
                 </div>

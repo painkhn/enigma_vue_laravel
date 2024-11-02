@@ -38,8 +38,8 @@
 <template>
     <form @submit.prevent="createComment" action="" method="POST" class="themesComments__form flex flex-col mb-5">
         <!-- <p>{{props.theme.id}}</p> -->
-        <label for="" class="themesComments__form-label mb-1 text-gray-600 font-semibold">Введите комментарий</label>
-        <input v-model="content" type="text" class="themesComments__form-input placeholder:text-gray-400 mb-5 w-full h-10 transition-all border-gray-400 focus:ring-red-400 focus:border-red-400 rounded text-gray-600" placeholder="Ваш комментарий">
+        <label for="" class="themesComments__form-label mb-1 text-gray-600 font-semibold dark:text-white/80">Введите комментарий</label>
+        <input v-model="content" type="text" class="themesComments__form-input dark:bg-zinc-600 dark:focus:bg-zinc-500 dark:text-white/90 placeholder:text-gray-400 mb-5 w-full h-10 transition-all border-gray-400 focus:ring-red-400 focus:border-red-400 rounded text-gray-600" placeholder="Ваш комментарий">
         <input type="submit" value="Отправить" class="themesComments__form-submit w-full h-10 bg-red-400 text-white font-semibold transition-all hover:bg-red-300 rounded-md cursor-pointer">
     </form>
 </template>

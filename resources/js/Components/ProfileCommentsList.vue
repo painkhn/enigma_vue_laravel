@@ -76,12 +76,12 @@
 <template>
     <ul class="profileComments__list flex flex-col gap-5 cursor-pointer">
         <li v-for="(comment, index) in comments" :key="comment.id">
-            <div class="py-2 px-4 w-full bg-gray-100 rounded-md transition-all hover:border-l-2 hover:border-red-400">
-                <h3 class="profileComments__list-username font-semibold text-lg text-gray-600">{{ comment.user.name }}</h3>
-                <p class="textForCopy mb-2">{{ comment.content }}</p>
-                <div v-if="$page.props.auth.user.is_admin == 1 || $page.props.auth.user.id == comment.user.id">
+            <div class="py-2 px-4 w-full dark:bg-zinc-600 dark:hover:bg-zinc-500 bg-gray-100 rounded-md transition-all hover:border-l-2 hover:border-red-400">
+                <h3 class="profileComments__list-username font-semibold text-lg text-gray-600 dark:text-white">{{ comment.user.name }} <span v-if="comment.user.is_admin == 1">- Администратор</span></h3>
+                <p class="textForCopy mb-2 dark:text-white">{{ comment.content }}</p>
+                <div v-if="$page.props.auth.user.is_admin == 1 || $page.props.auth.user.id == comment.user.id" class="flex gap-2">
+                    <button @click="commentEditOpen" class="px-5 py-2 bg-red-400 text-white transition-all hover:bg-red-300 rounded-md font-semibold">Редактировать</button>
                     <button @click="deleteComment(comment.id)" class="px-5 py-2 bg-red-400 text-white transition-all hover:bg-red-300 rounded-md font-semibold">Удалить</button>
-                    <button @click="commentEditOpen" class="ml-2 px-5 py-2 bg-red-400 text-white transition-all hover:bg-red-300 rounded-md font-semibold">Редактировать</button>
                 </div>
                 <form @submit.prevent="updateComment(comment.id, $event)" v-if="commentEditIsVisible" action="" class="comment__edit-form flex flex-col mt-2">
                     <label for="" class="mb-1">Введите новый комментарий</label>

@@ -69,19 +69,19 @@
          <!-- <p>{{ props.comments }}</p> -->
 
         <li v-for="(comment, index) in props.comments" :key="comment.id">
-            <div class="themesComments__list-item w-full p-5 rounded-md bg-gray-100 border-l-2 border-red-400 flex flex-col gap-3">
+            <div class="themesComments__list-item w-full p-5 rounded-md bg-gray-100 dark:bg-zinc-600 border-l-2 border-red-400 flex flex-col gap-3">
                 <p class="themesComments__list-item--username text-red-400 font-semibold text-lg">{{ comment.user.name }} <span v-if="comment.user.is_admin == 1">- Администратор</span></p>
-                <p class="themesComments__list-item--username text-gray-600">{{ comment.content }}</p>
+                <p class="themesComments__list-item--username text-gray-600 dark:text-white/90">{{ comment.content }}</p>
                 <div class="flex items-center gap-3">
                     <!-- <a href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Редактировать</a> -->
                     <button @click="commentEditOpen" href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Редактировать</button>
                     <!-- <a href="#!" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300">Удалить</a> -->
                     <button @click="deleteComment(comment.id)" class="px-5 py-2 bg-red-400 text-white font-semibold rounded-md transition-all hover:bg-red-300" v-if="$page.props.auth.user.is_admin == 1">Удалить</button>
-                    <a href="#!" class="px-5 py-2 bg-transparent border border-black text-black rounded-md transition-all hover:bg-white">Пожаловаться</a>
+                    <!-- <a href="#!" class="px-5 py-2 bg-transparent border border-black text-black rounded-md transition-all hover:bg-white">Пожаловаться</a> -->
                 </div>
                 <form @submit.prevent="updateComment(comment.id, $event)" v-if="commentEditIsVisible" action="" class="comment__edit-form flex flex-col">
-                    <label for="" class="mb-1">Введите новый комментарий</label>
-                    <input v-model="content" type="text" class="w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
+                    <label for="" class="mb-1 dark:text-white/90">Введите новый комментарий</label>
+                    <input v-model="content" type="text" class="dark:bg-zinc-600 dark:focus:bg-zinc-500 dark:text-white/90 w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
                     <button type="submit" class="w-full h-10 font-semibold bg-red-400 rounded-md transition-all hover:bg-red-300 text-white">Отправить</button>
                 </form>
             </div>

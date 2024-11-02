@@ -45,7 +45,7 @@ const submit = () => {
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full dark:bg-zinc-600 dark:text-white/90"
                     v-model="form.email"
                     required
                     autofocus
@@ -61,7 +61,7 @@ const submit = () => {
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full dark:bg-zinc-600 dark:text-white/90"
                     v-model="form.password"
                     required
                     autocomplete="current-password"
@@ -75,7 +75,7 @@ const submit = () => {
             <div class="mt-4 block">
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
+                    <span class="ms-2 text-sm text-gray-600 dark:text-white/90"
                         >Запомнить данные</span
                     >
                 </label>

@@ -54,9 +54,9 @@
 
 <template>
     <form @submit.prevent="createComplaint" method="POST" action="" class="complaint__form flex flex-col w-full">
-        <h2 class="complaint__form__title text-center font-bold text-red-400 text-lg mb-5">Отправить жалобу</h2>
-        <label for="" class="text-red-400 font-semibold mb-2">Жалоба</label>
-        <textarea v-model="complaint" name="complain" id="complain" placeholder="Введите сюда текст вашей жалобы" class="mb-5 transition-all rounded w-full h-40 outline-none focus:ring-red-400 focus:border-red-400"></textarea>
+        <h2 class="complaint__form__title text-center font-bold text-red-400 dark:text-white/90 text-lg mb-5">Отправить жалобу</h2>
+        <label for="" class="text-red-400 font-semibold mb-2 text-gray-600 dark:text-white/90">Жалоба</label>
+        <textarea v-model="complaint" name="complain" id="complain" placeholder="Введите сюда текст вашей жалобы" class="dark:bg-zinc-600 dark:focus:bg-zinc-500 dark:text-white/90 dark:placeholder:text-white/60 mb-5 transition-all rounded w-full h-40 outline-none focus:ring-red-400 focus:border-red-400"></textarea>
         <input type="submit" value="Отправить" class="w-full h-10 bg-red-400 text-white font-semibold transition-all hover:bg-red-300 rounded-md cursor-pointer">
         <!-- <button type="submit" class="w-full h-10 bg-red-400 text-white font-semibold transition-all hover:bg-red-300 rounded-md cursor-pointer">Отправить</button> -->
     </form>

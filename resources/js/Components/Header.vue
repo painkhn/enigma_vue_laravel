@@ -50,7 +50,7 @@
                     <Link
                         v-if="canRegister"
                         :href="route('register')"
-                        class="rounded-md px-3 py-2 font-semibold text-gray-600 ring-1 ring-transparent transition hover:text-red-400 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        class="rounded-md px-3 py-2 font-semibold text-gray-600 ring-1 ring-transparent transition hover:text-red-400 focus:outline-none focus-visible:ring-[#FF2D20] dark:hover:bg-zinc-600 dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                     >
                         Регистрация
                     </Link>

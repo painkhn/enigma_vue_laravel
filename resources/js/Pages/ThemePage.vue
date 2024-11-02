@@ -154,10 +154,12 @@
                 </li>
                 <li v-if="themeEditIsVisible">
                     <form action="" @submit.prevent="updateTheme(theme.id, $event)">
-                        <label for="font-semibold font-gray-600">Редактировать тему</label>
-                        <input v-model="title" placeholder="Название темы" type="text" class="w-full mt-1 h-10 mb-2 placeholder:text-gray-300 border-gray-400 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
+                        <label for="font-semibold text-gray-600 dark:text-white">
+                            <span class="text-gray-600 dark:text-white/80">Редактировать тему</span>
+                        </label>
+                        <input v-model="title" placeholder="Название темы" type="text" class="w-full mt-1 h-10 mb-2 dark:bg-zinc-600 dark:focus:bg-zinc-500 dark:text-white/90 placeholder:text-gray-300 border-gray-400 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400">
                         <!-- <input placeholder="Контент" type="text" class="w-full h-10 mb-2 outline-none transition-all rounded focus:ring-red-400 focus:border-red-400"> -->
-                        <textarea v-model="content" name="" id="" placeholder="Контент" class="text-gray-600 placeholder:text-gray-300 w-full h-40 rounded border-gray-400 border transition-all focus:border-red-400 focus:ring-red-400">
+                        <textarea v-model="content" name="" id="" placeholder="Контент" class="dark:bg-zinc-600 dark:focus:bg-zinc-500 dark:text-white/90 text-gray-600 placeholder:text-gray-300 w-full h-40 rounded border-gray-400 border transition-all focus:border-red-400 focus:ring-red-400">
 
                         </textarea>
                         <button type="submit" class="w-full h-10 font-semibold bg-red-400 rounded-md transition-all hover:bg-red-300 text-white">Отправить</button>
