@@ -10,7 +10,7 @@
 
 <template>
     <div class="flex w-4/12 flex-col">
-        <div class="main__categories w-full bg-white dark:bg-zinc-800 p-8 rounded-l-xl border-l border-t border-b border-slate-200">
+        <div class="main__categories w-full dark:border-zinc-900 bg-white dark:bg-zinc-700 p-8 rounded-l-xl border-l border-t border-b border-slate-200">
             <MainCategoriesItem />
         </div>
         <div class="main__users mt-4 w-full px-5">

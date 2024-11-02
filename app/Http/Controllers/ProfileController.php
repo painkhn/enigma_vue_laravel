@@ -22,7 +22,7 @@ class ProfileController extends Controller
     public function profileIndex($name) {
         #Валидация добавь
         $user = User::where('name', $name)->with('comments')->first();
-        $comments = Comments::with('user')->where('user_id', $name)->get();
+        $comments = Comments::with('user')->where('profile_id', $user->id)->orderBy('created_at', 'desc')->get();
         return Inertia::render('Profile', [
             'themes' => Theme::where('user_id', $user->id)->get(),
             'user' => $user,
@@ -63,6 +63,7 @@ class ProfileController extends Controller
     
         return redirect()->back()->with('success', 'Аватарка успешно изменена!');
     }
+
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [

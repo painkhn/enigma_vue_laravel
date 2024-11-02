@@ -8,6 +8,9 @@
         user: {
             type: Object,
         },
+        comments: {
+            type: Object
+        },
     })
 
     const content = ref('');
@@ -52,6 +55,6 @@
             <input type="submit" value="Отправить" class="themesComments__form-submit w-full h-10 bg-red-400 text-white font-semibold transition-all hover:bg-red-300 rounded-md cursor-pointer">
         </form>
 
-        <ProfileCommentsList />
+        <ProfileCommentsList :comments="props.comments" />
     </div>
 </template>

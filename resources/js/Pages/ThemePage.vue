@@ -122,24 +122,24 @@
     />
 
     <main>
-        <div class="themesInfo max-w-7xl rounded-xl w-full mx-auto my-0 h-auto p-5 bg-white border border-slate-200 mt-10 selection:bg-[#f87171] selection:text-white mb-10">
-            <button @click="goBack" class="themesInfo__back text-gray-600 transition-all hover:text-red-400">Вернуться назад</button>
+        <div class="themesInfo max-w-7xl rounded-xl w-full mx-auto my-0 h-auto p-5 dark:bg-zinc-700 dark:border-zinc-900 bg-white border border-slate-200 mt-10 selection:bg-[#f87171] selection:text-white mb-10">
+            <button @click="goBack" class="themesInfo__back dark:text-white/80 dark:hover:text-red-400 text-gray-600 transition-all hover:text-red-400">Вернуться назад</button>
             <ul class="themesInfo__list flex flex-col gap-3 mt-3">
                 <li class="mb-2">
-                    <p @click="copyContent()" class="textForCopy text-red-400 font-semibold transition-all text-xl w-full py-2 px-4 bg-slate-100 rounded cursor-pointer hover:border-l-2 hover:border-red-400">{{ $page.props.theme.name }}</p>
+                    <p @click="copyContent()" class="textForCopy text-red-400 font-semibold transition-all text-xl w-full py-2 px-4 bg-slate-100 dark:bg-zinc-500 dark:text-white/80 dark:hover:text-red-400 rounded cursor-pointer hover:border-l-2 hover:border-red-400">{{ $page.props.theme.name }}</p>
                 </li>
                 <li class="mb-4">
-                    <p class="text-gray-600 text-md text-lg">{{ $page.props.theme.content }}</p>
+                    <p class="text-gray-600 text-md text-lg dark:text-white/90">{{ $page.props.theme.content }}</p>
                 </li>
                 <li>
                     <p class="text-gray-400 text-sm">{{ formatDate($page.props.theme.created_at) }}</p>
                 </li>
                 <li>
-                    <Link class="text-red-400 font-semibold" :href="`/category/${$page.props.theme.category.id}`">{{ $page.props.theme.category.name }}</Link>
+                    <Link class="text-red-400 transition-all font-semibold dark:hover:text-white/90" :href="`/category/${$page.props.theme.category.id}`">{{ $page.props.theme.category.name }}</Link>
                 </li>
                 <hr class="border">
                 <li>
-                    <Link :href="`/users/${$page.props.theme.user.name}`" class="text-red-400 text font-bold">{{$page.props.theme.user.name}}</Link>
+                    <Link :href="`/users/${$page.props.theme.user.name}`" class="text-red-400 text font-bold transition-all dark:hover:text-white/90">{{$page.props.theme.user.name}}</Link>
                 </li>
                 <li>
                     <button @click="complaintOpen" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">Пожаловаться</button>
