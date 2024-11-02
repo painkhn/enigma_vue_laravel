@@ -57,12 +57,12 @@
         :user="props.user"
     />
 
-    <div class="max-w-7xl w-full h-auto bg-white mx-auto my-0 p-10 mt-10 rounded-md shadow-md">
+    <div class="max-w-7xl w-full h-auto dark:bg-zinc-700 bg-white mx-auto my-0 p-10 mt-10 rounded-md shadow-md">
         <ComplaintForm :complaint="props.complaint" v-if="$page.props.auth.user.is_admin == 0" />
 
         <ul class="complaint__list flex flex-col gap-5" v-else>
             <li v-for="complaint in $page.props.complaints" :key="complaint.id">
-                <Link :href="`theme/${complaint.theme_id}`" class="transition-all hover:text-red-400 px-4 rounded-md flex w-full bg-gray-200 py-3 text-base font-semibold hover:bg-gray-100 hover:border-l-2 hover:border-red-400">
+                <Link :href="`theme/${complaint.theme_id}`" class="transition-all hover:text-red-400 px-4 rounded-md flex w-full dark:bg-zinc-600 bg-gray-200 py-3 text-base font-semibold dark:hover:bg-zinc-500 hover:bg-gray-100 hover:border-l-2 hover:border-red-400 dark:text-white/90 dark:hover:text-white">
                     <span class="text-red-400 mr-2">{{ complaint.user.name }}:</span> {{ complaint.complaint }} <button class="ml-auto cursor-pointer hover:bg-gray-300 px-5" @click="deleteComplaint(complaint.id)">X</button>
                 </Link>
             </li>

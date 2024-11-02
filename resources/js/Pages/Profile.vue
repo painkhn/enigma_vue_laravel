@@ -32,7 +32,7 @@
 </script>
 
 <template>
-    <Head :title="'Профиль'" />
+    <Head :title="$page.props.user.name" />
 
     <Header
         :canLogin="props.canLogin" 
