@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Theme, Category, User, Comments};
+use App\Models\{Theme, Category, User, Comments, View};
 use App\Http\Requests\StoreThemeRequest;
 use App\Http\Requests\UpdateThemeRequest;
 use Illuminate\Support\Facades\Route;
@@ -82,15 +82,18 @@ class ThemeController extends Controller
      */
     public function show($id)
     {
-        $theme = Theme::with('user', 'category', 'comments')->findOrFail($id);
+        $theme = Theme::with('user', 'category', 'comments')->withCount('views')->findOrFail($id);
         // dd($theme);
         $comments = Comments::with('user')->where('theme_id', $id)->get();
+        $user = Auth::user();
         // dd($theme->user);
         return Inertia::render('ThemePage', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'theme' => $theme,
-            'comments' => $comments
+            'comments' => $comments,
+            'user' => $user,
+            'views_count' => $theme->views_count,
             // 'comments' => $comments
         ]);
     }

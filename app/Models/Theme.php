@@ -32,4 +32,8 @@ class Theme extends Model
     {
         return $this->belongsTo(Complaint::class);
     }
+    public function views()
+    {
+        return $this->hasMany(View::class);
+    }
 }

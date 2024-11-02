@@ -57,4 +57,8 @@ Route::controller(App\Http\Controllers\Auth\AuthenticatedSessionController::clas
     Route::get('login/yandex/redirect', 'yandexRedirect')->name('yandexRedirect');
 });
 
+Route::controller(App\Http\Controllers\ViewController::class)->group(function() {
+   Route::post('/view/new', 'store')->name('new_view'); 
+});
+
 require __DIR__.'/auth.php';

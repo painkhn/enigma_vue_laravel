@@ -70,6 +70,9 @@
         complaint: {
             type: Object
         },
+        views_count: {
+            type: Number
+        }
     });
 
     const complainIsVisible = ref(false)
@@ -108,7 +111,22 @@
     }
 
     onMounted(() => {
-        console.log('Comments:', props.comments);
+        console.log('Рез:', props.user);
+
+        const newView = async () => {
+            try {
+                const response = await axios.post(route('new_view'), {
+                    user_id: props.user.id,
+                    theme_id: props.theme.id
+                });
+
+                console.log('View recorded successfully:', response.data);
+            } catch (error) {
+                console.error('Error recording view:', error);
+            }
+        };
+
+        newView();
     })
 </script>
 
@@ -122,6 +140,7 @@
     />
 
     <main>
+        <!-- <p class="text-xl text-blue-500">{{ $page.props.user_id }}</p> -->
         <div class="themesInfo max-w-7xl rounded-xl w-full mx-auto my-0 h-auto p-5 dark:bg-zinc-700 dark:border-zinc-900 bg-white border border-slate-200 mt-10 selection:bg-[#f87171] selection:text-white mb-10">
             <button @click="goBack" class="themesInfo__back dark:text-white/80 dark:hover:text-red-400 text-gray-600 transition-all hover:text-red-400">Вернуться назад</button>
             <ul class="themesInfo__list flex flex-col gap-3 mt-3">
@@ -140,6 +159,9 @@
                 <hr class="border">
                 <li>
                     <Link :href="`/users/${$page.props.theme.user.name}`" class="text-red-400 text font-bold transition-all dark:hover:text-white/90">{{$page.props.theme.user.name}}</Link>
+                </li>
+                <li>
+                    <p class="text-gray-400 text-sm">Просмотры: {{ props.views_count }}</p>
                 </li>
                 <li>
                     <button @click="complaintOpen" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">Пожаловаться</button>
