@@ -46,11 +46,11 @@ class CommentsController extends Controller
         return response()->json(['redirect' => '/']);
     }
 
-    public function profileStore(request $request)
+    public function profileStore(Request $request)
     {
-        $user = User::find($request->user_id);
+        $user = User::find($request->profile_id);
         $comment = Comments::create([
-            'content' => 'content',
+            'content' => $request->content,
             'user_id' => Auth::id(),
             'profile_id' => $user->id
         ]);

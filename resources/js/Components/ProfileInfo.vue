@@ -10,7 +10,8 @@
 
 <template>
     <div class="profileInfo flex gap-5">
-        <img :src="`/storage/` + $page.props.user.avatar || '/img/avatar_default.jpg'" alt="Аватарка" encType="multipart/form-data" class="profileInfo__avatar w-40 h-40 rounded border-slate-200">
+        <img v-if="$page.props.user.avatar == NULL" src='/img/avatar_default.jpg' class="profileInfo__avatar w-40 h-40 rounded border-slate-200" alt="">
+        <img v-else :src="`/storage/` + $page.props.user.avatar" alt="Аватарка" encType="multipart/form-data" class="profileInfo__avatar w-40 h-40 rounded border-slate-200">
         
         <!-- <div>
             <input type="file" name="avatar_change" @change="handleFileChange" accept="image/*">

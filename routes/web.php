@@ -38,7 +38,7 @@ Route::controller(App\Http\Controllers\CategoryController::class)->group(functio
 
 Route::controller(App\Http\Controllers\CommentsController::class)->group(function() {
     Route::post('/comment/new','store')->name('new_comment');
-    Route::post('profile/comment/new','profileStore')->name('new_profile_comment');
+    Route::post('/profile/comment/new','profileStore')->name('new_profile_comment');
     Route::delete('/comment/delete/{comments}','destroy')->name('delete_comment');
     Route::patch('/comment/update/{comments}','update')->name('update_comment');
     // Route::get('/comment', 'index')->name('get_comment');

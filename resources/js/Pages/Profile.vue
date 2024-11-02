@@ -47,7 +47,7 @@
 
         <ProfileThemes v-if="themesIsVisible" />
 
-        <ProfileComments v-else />
+        <ProfileComments v-else :user="props.user" />
         <!-- <form class="profile__comment-form">
             <label for="">Оставьте комментарий</label>
             <textarea name="" id=""></textarea>
