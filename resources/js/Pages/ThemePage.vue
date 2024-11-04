@@ -111,13 +111,12 @@
     }
 
     onMounted(() => {
-        console.log('Рез:', props.user);
+        console.log('Рез:', props.theme.id);
 
         const newView = async () => {
             try {
-                const response = await axios.post(route('new_view'), {
-                    user_id: props.user.id,
-                    theme_id: props.theme.id
+                const response = await axios.post(route('new_view', { theme_id: props.theme.id }), {
+                    user_id: props.user.id
                 });
 
                 console.log('View recorded successfully:', response.data);
