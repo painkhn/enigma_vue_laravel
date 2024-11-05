@@ -64,6 +64,7 @@ Route::controller(App\Http\Controllers\ViewController::class)->group(function() 
 Route::controller(App\Http\Controllers\RatingController::class)->group(function() {
     Route::get('/rating','index')->name('rating_show');
     Route::get('/rating/views','sortByViews')->name('rating_views');
+    Route::get('/rating/likes','sortByLikes')->name('rating_likes');
 });
 
 Route::controller(App\Http\Controllers\LikeController::class)->group(function() {

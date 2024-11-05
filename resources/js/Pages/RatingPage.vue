@@ -27,6 +27,9 @@
             },
             views_count: {
                 type: Number
+            },
+            likes_count: {
+                type: Number
             }
         });
 
@@ -48,7 +51,8 @@
         <h1 class="text-white text-center font-bold text-xl mb-10">Рейтинг</h1>
         <div class="flex justify-center gap-5 mb-10">
             <Link :href="route('rating_views')" class="text-white font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/30">По просмотрам</Link>
-            <button class="text-white font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/30">По лайкам</button>
+            <Link :href="route('rating_likes')" class="text-white font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/30">По Лайкам</Link>
+            <!-- <button class="text-white font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/30">По лайкам</button> -->
         </div>
         <ul class="flex flex-col gap-5">
             <li v-for="(theme, index) in $page.props.themes" :key="index">
@@ -56,6 +60,7 @@
                     {{ theme.name }}
                     <br>
                     <span class="text-sm text-white/90 font-normal">Количество просмотров: {{ theme.views_count }}</span> 
+                    <span class="text-sm text-white/90 font-normal">Количество лайков: {{ theme.likes_count }}</span> 
                 </Link>
             </li>
         </ul>

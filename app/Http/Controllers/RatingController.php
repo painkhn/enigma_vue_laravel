@@ -18,7 +18,7 @@ class RatingController extends Controller
     public function index()
     {
         $users = User::all(); // Получаем всех пользователей
-        $themes = Theme::with('user')->withCount('views')->get(); // Получаем все темы вместе с пользователями
+        $themes = Theme::with('user')->withCount('views', 'likes')->get(); // Получаем все темы вместе с пользователями
 
         // dd($themes);
 
@@ -34,7 +34,21 @@ class RatingController extends Controller
     public function sortByViews()
     {
         $users = User::all();
-        $themes = Theme::with('user')->withCount('views')->orderBy('views_count', 'desc')->get();
+        $themes = Theme::with('user')->withCount('views', 'likes')->orderBy('views_count', 'desc')->get();
+
+        return Inertia::render('RatingPage', [
+            'themes' => $themes,
+            'users' => $users,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            // 'views_count' => $themes->views_count,
+        ]);
+    }
+
+    public function sortByLikes()
+    {
+        $users = User::all();
+        $themes = Theme::with('user')->withCount('likes', 'views')->orderBy('likes_count', 'desc')->get();
 
         return Inertia::render('RatingPage', [
             'themes' => $themes,
