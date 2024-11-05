@@ -86,6 +86,8 @@ class ThemeController extends Controller
         // dd($theme);
         $comments = Comments::with('user')->where('theme_id', $id)->get();
         $user = Auth::user();
+
+        $isLiked = $theme->likes()->where('user_id', $user->id)->exists();
         // dd($theme->user);
         return Inertia::render('ThemePage', [
             'canLogin' => Route::has('login'),
@@ -95,6 +97,7 @@ class ThemeController extends Controller
             'user' => $user,
             'views_count' => $theme->views_count,
             'likes_count' => $theme->likes_count,
+            'is_liked' => $isLiked,
             // 'comments' => $comments
         ]);
     }

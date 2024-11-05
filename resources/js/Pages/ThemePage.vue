@@ -75,6 +75,9 @@
         },
         likes_count: {
             type: Number
+        },
+        is_liked: {
+            type: Boolean
         }
     });
 
@@ -113,13 +116,24 @@
         }
     }
 
+    const isFavorite = ref(props.is_liked); 
+
     const addLike = async () => {
         try {
             const response = await axios.post(route('new_like', { theme_id: props.theme.id }), {
                 user_id: props.user.id
             })
 
+            isFavorite.value = response.data.liked;
+            props.likes_count = response.data.likes_count;
+
+            // isFavorite.value = !isFavorite.value
+
+            console.log(isFavorite.value)
+
             console.log('Лайк поставился успешно')
+
+            location.reload()
         } catch (err) {
             console.log('Не удалось поставить лайк', err)
         }
@@ -178,7 +192,13 @@
                     <p class="text-gray-400 text-sm">Просмотры: {{ props.views_count }}</p>
                 </li>
                 <li class="flex items-center gap-2">
-                    <button @click="addLike">
+                    
+                    <button @click="addLike" v-if="isFavorite">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z"/>
+                        </svg>                          
+                    </button>
+                    <button @click="addLike" v-if="!isFavorite">
                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
                         </svg>
@@ -229,4 +249,7 @@
             </div>
         </div>
     </main>
-</template>
+</template>,
+is_liked: {
+    type: Boolean
+}

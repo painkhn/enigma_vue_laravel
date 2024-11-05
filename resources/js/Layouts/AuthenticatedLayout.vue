@@ -31,14 +31,14 @@
                 <Link :href="route('themeCreate')" class="dark:hover:text-white/80 dark:text-white/90 text-gray-600 transition-all flex items-center dark:hover:bg-zinc-600 hover:text-red-400 h-14 font-medium hover:border-b-2 hover:bg-slate-50 px-2 hover:border-red-400">
                     Создать тему
                 </Link>
-                <Link :href="'/'" v-if="$page.props.auth.user && $page.props.auth.user.is_admin == 1" class="dark:hover:text-white/80 dark:text-white/90 text-gray-600 header__admin-link transition-all flex px-2 items-center dark:hover:bg-zinc-600 hover:text-red-400 hover:bg-slate-50 h-14 font-medium hover:border-b-2 hover:border-red-400">
-                    Панель администратора
+                <Link :href="route('rating_show')" class="dark:hover:text-white/80 dark:text-white/90 text-gray-600 transition-all flex items-center dark:hover:bg-zinc-600 hover:text-red-400 h-14 font-medium hover:border-b-2 hover:bg-slate-50 px-2 hover:border-red-400">
+                    Рейтинг
                 </Link>
             </nav>
             <Link
                 v-if="$page.props.auth.user"
                 :href="route('profile', { name: $page.props.auth.user.name})"
-                class="rounded-md px-3 font-semibold py-2 text-gray-600 ring-1 ring-transparent transition hover:text-red-400 focus:outline-none focus-visible:ring-[#FF2D20] dark:hover:bg-zinc-600 dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                class="justify-self-end rounded-md px-3 font-semibold py-2 text-gray-600 ring-1 ring-transparent transition hover:text-red-400 focus:outline-none focus-visible:ring-[#FF2D20] dark:hover:bg-zinc-600 dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
             >
                 {{ $page.props.auth.user.name }}
             </Link>

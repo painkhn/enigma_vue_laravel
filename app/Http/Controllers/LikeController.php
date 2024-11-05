@@ -30,28 +30,38 @@ class LikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store($id)
+    public function store($theme_id)
     {
         $user = Auth::user();
-        // Assuming you want to get the first theme or a specific one
-        $theme = Theme::find($id); // or Theme::find($id) if you have an ID
+        $theme = Theme::find($theme_id);
 
-        if ($theme) {
-            $existingLike = Like::where('theme_id', $theme->id)
-                                ->where('user_id', $user->id)
-                                ->get();
-            
-            if ($existingLike->isEmpty()) { // Check if no existing views
-                Like::create([
-                    'theme_id' => $theme->id,
-                    'user_id' => $user->id,
-                ]);
-            }
-        } else {
-            // Handle the case where no theme is found
-            // e.g., return an error response or log it
+        if (!$theme) {
             return response()->json(['error' => 'Theme not found'], 404);
         }
+
+        // Check if the user has already liked this theme
+        $existingLike = Like::where('theme_id', $theme->id)
+                            ->where('user_id', $user->id)
+                            ->first();
+
+        if ($existingLike) {
+            // User has already liked, so remove the like
+            $existingLike->delete();
+            $liked = false; // Set liked to false
+        } else {
+            // User has not liked yet, so add a new like
+            Like::create([
+                'theme_id' => $theme->id,
+                'user_id' => $user->id,
+            ]);
+            $liked = true; // Set liked to true
+        }
+
+        // Return the updated likes count
+        return response()->json([
+            'liked' => $liked,
+            'likes_count' => $theme->likes()->count(),
+        ]);
     }
 
     /**
