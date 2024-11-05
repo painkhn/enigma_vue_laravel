@@ -82,7 +82,7 @@ class ThemeController extends Controller
      */
     public function show($id)
     {
-        $theme = Theme::with('user', 'category', 'comments')->withCount('views')->findOrFail($id);
+        $theme = Theme::with('user', 'category', 'comments')->withCount('likes', 'views')->findOrFail($id);
         // dd($theme);
         $comments = Comments::with('user')->where('theme_id', $id)->get();
         $user = Auth::user();
@@ -94,6 +94,7 @@ class ThemeController extends Controller
             'comments' => $comments,
             'user' => $user,
             'views_count' => $theme->views_count,
+            'likes_count' => $theme->likes_count,
             // 'comments' => $comments
         ]);
     }

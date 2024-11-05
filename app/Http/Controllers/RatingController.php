@@ -33,6 +33,15 @@ class RatingController extends Controller
 
     public function sortByViews()
     {
-        //
+        $users = User::all();
+        $themes = Theme::with('user')->withCount('views')->orderBy('views_count', 'desc')->get();
+
+        return Inertia::render('RatingPage', [
+            'themes' => $themes,
+            'users' => $users,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            // 'views_count' => $themes->views_count,
+        ]);
     }
 }

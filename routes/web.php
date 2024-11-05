@@ -63,6 +63,11 @@ Route::controller(App\Http\Controllers\ViewController::class)->group(function() 
 
 Route::controller(App\Http\Controllers\RatingController::class)->group(function() {
     Route::get('/rating','index')->name('rating_show');
+    Route::get('/rating/views','sortByViews')->name('rating_views');
+});
+
+Route::controller(App\Http\Controllers\LikeController::class)->group(function() {
+    Route::post('/like/new/{theme_id}', 'store')->name('new_like');
 });
 
 require __DIR__.'/auth.php';

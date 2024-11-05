@@ -36,4 +36,8 @@ class Theme extends Model
     {
         return $this->hasMany(View::class);
     }
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }
