@@ -211,7 +211,7 @@
                 <li v-if="complainIsVisible">
                     <ComplaintForm id="complaintForm" :complaint="props.complaint" :theme="props.theme" />
                 </li>
-                <li>
+                <li v-if="$page.props.auth.user.is_admin == 1 || $page.props.auth.user.id == $page.props.theme.user.id">
                     <button @click="themeEditOpen" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
                         Редактировать тему
                     </button>
@@ -230,7 +230,7 @@
                     </form>
                 </li>
                 <li>
-                    <button v-if="$page.props.auth.user.is_admin == 1" @click="deleteTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
+                    <button v-if="$page.props.auth.user.is_admin == 1 ||$page.props.auth.user.id == $page.props.theme.user.id " @click="deleteTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
                         Удалить тему
                     </button>
                 </li>

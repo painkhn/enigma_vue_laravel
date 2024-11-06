@@ -32,17 +32,22 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'age' => 'required|string|max:3',
+            'date_of_birth' => 'required|date|before:today',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
             'password.confirmed' => "Пароли не совпадают"
         ]);
 
+        $dob = \Carbon\Carbon::parse($request->date_of_birth);
+        $age = $dob->age;
+
+        // dd($age);
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'age' => $request->age,
+            'age' => $age,
             'password' => Hash::make($request->password),
         ]);
 

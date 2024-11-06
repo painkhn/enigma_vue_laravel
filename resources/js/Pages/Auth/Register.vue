@@ -10,7 +10,7 @@ import Footer from '@/Components/Footer.vue'
 const form = useForm({
     name: '',
     email: '',
-    age: '',
+    date_of_birth: '',
     password: '',
     password_confirmation: '',
 });
@@ -63,9 +63,9 @@ const submit = () => {
 
                 <TextInput
                     id="age"
-                    type="text"
+                    type="date"
                     class="mt-1 block w-full"
-                    v-model="form.age"
+                    v-model="form.date_of_birth"
                     required
                     autocomplete="username"
                 />

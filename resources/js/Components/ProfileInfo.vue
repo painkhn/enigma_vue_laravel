@@ -6,6 +6,18 @@
         window.open(route('download_profile', { name: userName }), '_blank');
     }
 
+    const getYearsWord = (age) => {
+        if (age % 10 === 1 && age % 100 !== 11) {
+            return 'год';
+        } else if ((age % 10 >= 2 && age % 10 <= 4) && (age % 100 < 10 || age % 100 >= 20)) {
+            return 'года';
+        } else {
+            return 'лет';
+        }
+    };
+
+
+
 </script>
 
 <template>
@@ -28,7 +40,7 @@
             </div>
             <hr class="border-gray-400 opacity-80 mb-2">
             <p class="profileInfo__info-email mb-2 dark:text-white">{{ $page.props.user.email }}</p>
-            <p class="profileInfo__info-age mb-2 dark:text-white">{{ $page.props.user.age }} лет</p>
+            <p class="profileInfo__info-age mb-2 dark:text-white">{{ $page.props.user.age }} {{ getYearsWord($page.props.user.age) }}</p>
             <hr class="border-gray-400 opacity-80 mb-2">
             <div class="flex flex-col items-start gap-2">
                 <Link :href="route('themeCreate')" class="transition-all dark:text-white/80 dark:hover:text-red-400 hover:text-red-400 font-semibold" as="button" v-if="$page.props.auth.user.id == $page.props.user.id">Создать тему</Link>
