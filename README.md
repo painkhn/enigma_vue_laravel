@@ -10,6 +10,7 @@
 - Создать файл конфигурации с примера `copy .env.example .env`
 >*Файл .env* <br> - Отредактировать файл конфигурации
 - Создать ключ приложения `php artisan key:generate`
+- Создать локальное хранилище `php artisan storage:link`
 - Мигрировать таблицы `php artisan migrate`
 - Запустить приложения `npm run dev` и `php artisan serve`
 
