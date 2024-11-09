@@ -47,8 +47,8 @@
         :user="props.user"
     />
 
-    <div class="max-w-7xl h-auto w-full bg-white dark:bg-zinc-700 mx-auto my-10 rounded-xl border border-zinc-900 p-10">
-        <h1 class="text-white text-center font-bold text-xl mb-10">Рейтинг</h1>
+    <div class="max-w-7xl h-auto w-full bg-white dark:bg-zinc-700 mx-auto my-10 rounded-xl border border-gray-200 dark:border-zinc-900 p-10">
+        <h1 class="dark:text-white text-zinc-700 text-center font-bold text-xl mb-10">Рейтинг</h1>
         <div class="flex justify-center gap-5 mb-10">
             <Link :href="route('rating_views')" class="text-white font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/30">По просмотрам</Link>
             <Link :href="route('rating_likes')" class="text-white font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/30">По Лайкам</Link>
