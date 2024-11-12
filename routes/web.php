@@ -28,6 +28,7 @@ Route::controller(App\Http\Controllers\ProfileController::class)->group(function
         Route::delete('/profile/destroy', 'destroy')->name('profile.destroy');
         Route::post('/profile/new_avatar', 'updateAvatar')->name('new_avatar');
         Route::get('/profile/download/{name}', 'download')->name('download_profile');
+        Route::get('/admin/{name}', 'admin')->name('admin');
     });
 });
 

@@ -19,7 +19,7 @@
     <div class="w-full bg-white border-b border-slate-200 dark:bg-zinc-700 dark:border-zinc-900">
         <header class="header max-w-7xl w-full h-14 grid grid-cols-3 items-center mx-auto my-0 gap-2 rounded-md">
             <PageLogo />
-            <nav class="justify-self-center justify-center flex items-center gap-3 w-full">
+            <nav class="relative justify-self-center justify-center flex items-center gap-3 w-full">
                 <Link :href="'/'" class="dark:hover:text-white/80 dark:text-white/90 text-gray-600 transition-all flex items-center h-14 px-2 dark:hover:bg-zinc-600 hover:text-red-400 font-medium hover:border-b-2 hover:bg-slate-50 hover:border-red-400">
                     Главная
                 </Link>
@@ -32,6 +32,7 @@
                 <!-- <Link :href="'/'" v-if="$page.props.auth.user && $page.props.auth.user.is_admin == 1" class="dark:hover:text-white/80 dark:text-white/90 text-gray-600 header__admin-link transition-all flex px-2 items-center dark:hover:bg-zinc-600 hover:text-red-400 hover:bg-slate-50 h-14 font-medium hover:border-b-2 hover:border-red-400">
                     Панель администратора
                 </Link> -->
+                <Link v-if="$page.props.auth.user.is_admin == 1" :href="route('admin', { name: $page.props.auth.user.name})" class="absolute z-10 -bottom-10 px-4 py-2 bg-red-400 text-white rounded-b-xl transition-all hover:bg-red-300">Панель администратора</Link>
             </nav>
             <nav v-if="canLogin" class="flex flex-1 justify-self-end">
                 <Link

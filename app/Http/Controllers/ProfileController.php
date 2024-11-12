@@ -33,6 +33,15 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function Admin($name) {
+        $user = User::where('name', $name)->first();
+        return Inertia::render('AdminPage', [
+            'user' => $user,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+        ]);
+    }
+
     public function updateAvatar(Request $request)
     {
         // dd($request->all());
