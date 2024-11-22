@@ -35,8 +35,11 @@ class ProfileController extends Controller
 
     public function Admin($name) {
         $user = User::where('name', $name)->first();
+        $themes = Theme::with('category')->get();
+        // dd($themes);
         return Inertia::render('AdminPage', [
             'user' => $user,
+            'themes' => $themes,
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
         ]);
