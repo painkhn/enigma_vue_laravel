@@ -50,17 +50,17 @@
     <div class="max-w-7xl h-auto w-full bg-white dark:bg-zinc-700 mx-auto my-10 rounded-xl border border-gray-200 dark:border-zinc-900 p-10">
         <h1 class="dark:text-white text-zinc-700 text-center font-bold text-xl mb-10">Рейтинг</h1>
         <div class="flex justify-center gap-5 mb-10">
-            <Link :href="route('rating_views')" class="text-white font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/30">По просмотрам</Link>
-            <Link :href="route('rating_likes')" class="text-white font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/30">По Лайкам</Link>
+            <Link :href="route('rating_views')" class="dark:text-white text-zinc-900 font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/10 dark:hover:bg-black/30">По просмотрам</Link>
+            <Link :href="route('rating_likes')" class="dark:text-white text-zinc-900 font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/10 dark:hover:bg-black/30">По Лайкам</Link>
             <!-- <button class="text-white font-semibold px-5 py-3 bg-black/20 rounded-xl transition-all hover:bg-black/30">По лайкам</button> -->
         </div>
         <ul class="flex flex-col gap-5">
             <li v-for="(theme, index) in $page.props.themes" :key="index">
-                <Link :href="route('themeShow', { id: theme.id })" class="w-full flex flex-col gap-2 px-8 py-4 rounded-xl font-semibold transition-all bg-black/20 hover:bg-black/60 text-white">
+                <Link :href="route('themeShow', { id: theme.id })" class="w-full flex flex-col gap-2 px-8 py-4 rounded-xl font-semibold transition-all bg-black/20 hover:bg-black/10 dark:hover:bg-black/60 dark:text-white text-black">
                     {{ theme.name }}
                     <br>
-                    <span class="text-sm text-white/90 font-normal">Количество просмотров: {{ theme.views_count }}</span> 
-                    <span class="text-sm text-white/90 font-normal">Количество лайков: {{ theme.likes_count }}</span> 
+                    <span class="text-sm dark:text-white/90 text-zinc-900 font-normal">Количество просмотров: {{ theme.views_count }}</span> 
+                    <span class="text-sm dark:text-white/90 text-zinc-900 font-normal">Количество лайков: {{ theme.likes_count }}</span> 
                 </Link>
             </li>
         </ul>
