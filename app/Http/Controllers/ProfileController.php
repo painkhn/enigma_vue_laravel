@@ -89,10 +89,9 @@ class ProfileController extends Controller
         $usersThisYear = User::where('created_at', '>=', Carbon::now()->subYear())->count() ?: '0';
 
         $totalThemes = Theme::count() ?: '0';
-        $themesThisMonth = Theme::whereMonth('datetime', Carbon::now()->month)->count() ?: '0';
-        $themesThisHalfYear = Theme::where('datetime', '>=', Carbon::now()->subMonths(6))->count() ?: '0';
-        $themesThisYear = Theme::where('datetime', '>=', Carbon::now()->subYear())->count() ?: '0';
-        $upcomingThemes = Theme::where('datetime', '>', Carbon::now())->count() ?: '0';
+        $themesThisMonth = Theme::whereMonth('created_at', Carbon::now()->month)->count() ?: '0';
+        $themesThisHalfYear = Theme::where('created_at', '>=', Carbon::now()->subMonths(6))->count() ?: '0';
+        $themesThisYear = Theme::where('created_at', '>=', Carbon::now()->subYear())->count() ?: '0';
 
         $data = [
             [' '],
@@ -101,15 +100,15 @@ class ProfileController extends Controller
             ['Пользователей за полгода', $usersThisHalfYear],
             ['Пользователей за год', $usersThisYear],
             [' '],
-            ['Всего записей', $totalThemes],
-            ['Записей за этот месяц', $themesThisMonth],
-            ['Записей за полгода', $themesThisHalfYear],
-            ['Записей за год', $themesThisYear],
-            ['Предстоящих записей', $upcomingThemes],
+            ['Всего тем', $totalThemes],
+            ['Тем за этот месяц', $themesThisMonth],
+            ['Тем за полгода', $themesThisHalfYear],
+            ['Тем за год', $themesThisYear],
         ];
 
         return Excel::download(new ReportExport($data), 'report.xlsx');
     }
+
 
     public function updateAvatar(Request $request)
     {

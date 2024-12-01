@@ -129,6 +129,28 @@ const options = {
         }
     };
 
+    const downloadExcel = async () => {
+        try {
+            const response = await axios.get(route('excel'), {
+                responseType: 'blob', // Указываем, что ожидаем бинарный файл
+            });
+
+            // Создаем ссылку для скачивания
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'report.xlsx'); // Устанавливаем имя файла
+            document.body.appendChild(link);
+            link.click();
+
+            // Очищаем объект URL
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Ошибка при скачивании Excel файла:', error);
+        }
+    };
+
+
     onMounted(() => {
         initFlowbite();
 
@@ -193,6 +215,14 @@ const options = {
                       </div>
                     </div>
                 </div>
+            </div>
+            <div class="mb-10">
+                <button
+                    @click="downloadExcel"
+                    class="px-4 py-2 bg-red-400 transition-all hover:bg-red-300 text-white font-semibold rounded-md"
+                >
+                    Скачать в Excel
+                </button>
             </div>
             <div class="flex gap-5 mb-5 w-full">
                 <form @submit.prevent="searchUsers" method="POST" class="header__search-form flex items-center mb-5 w-full gap-5">

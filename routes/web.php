@@ -34,6 +34,7 @@ Route::middleware(IsBan::class)->group(function() {
             Route::post('/users/search', 'search')->name('user_search');
             Route::post('/ban-user/{id}','banUser')->name('ban_user');
             Route::post('/unban-user/{id}', 'unbanUser')->name('unban_user');
+            Route::get('/excel/download', 'excel')->name('excel');
         });
     });
     
