@@ -15,6 +15,12 @@ Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
+    Route::get('/login/yandex', [AuthenticatedSessionController::class, 'RedirectYandex'])
+         ->name('login.yandex');
+
+    Route::get('/login/yandex/callback', [AuthenticatedSessionController::class, 'CallbackYandex'])
+        ->name('login.yandex.call');
+
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])

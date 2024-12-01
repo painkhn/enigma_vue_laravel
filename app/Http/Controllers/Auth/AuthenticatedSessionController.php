@@ -55,26 +55,38 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 
-    public function yandex() // перенаправляем юзера на яндекс Auth
+    public function RedirectYandex() // перенаправляем юзера на яндекс Auth
     {
         return Socialite::driver('yandex')->redirect();
     }
-
-    public function yandexRedirect() // принимаем возвращаемые данные и работаем с ними
-    {
+    public function CallbackYandex() {
         $user = Socialite::driver('yandex')->user();
-        dd($user);
 
-        $user = User::firstOrCreate([ // используем firstOrCreate для проверки есть ли такие пользователи в нашей БД
-            'email' => $user->email
-        ], [
-            'name' => $user->user['display_name'], // display_name - переменаая хранящая полное ФИО пользователя
-                                                  // остальные переменные можете посмотреть использовав $dd('$user')
-            'password' => Hash::make(Str::random(24)),
-        ]);
+        // dd($user);
+        $existingUser = User::where('email', $user->email)->first();
+        if (!$existingUser) {
+            $userData = $user->user;
+            if (isset($userData['default_phone']['number'])) {
+                $phoneNumber = $userData['default_phone']['number'];
+            } else {
+                $phoneNumber = null;
+            }
 
-        Auth::login($user, true);
-
-        redirect()->route('main');
+            $newUser = User::create([
+                'name'=>$user->name,
+                'email'=>$user->email,
+                'password'=>null,
+                'phone'=>$phoneNumber
+            ]);
+            Auth::login($newUser);
+            return redirect(route('index'));
+        } else {
+            if ($existingUser->password === null){
+                Auth::login($existingUser);
+                return redirect(route('index'));
+            } else {
+                return redirect(route('login'))->with('error', 'Используйте логин-пароль для входа');
+            }
+        }
     }
 }

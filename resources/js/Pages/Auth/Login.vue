@@ -104,7 +104,7 @@ const submit = () => {
 
         <div class="mt-4 block">
             <!-- <button type="submit" class="w-full py-2 border border-black rounded-md transition-all hover:bg-gray-100" :href="route('yandex')">ЯНДЕКС</button> -->
-             <Link :href="route('yandex')" class="w-full py-2 border border-black rounded-md transition-all hover:bg-gray-100 flex justify-center">ЯНДЕКС</Link>
+             <Link :href="route('login.yandex')" class="w-full py-2 border border-black rounded-md transition-all hover:bg-gray-100 flex justify-center">ЯНДЕКС</Link>
         </div>
         
         <Footer />
