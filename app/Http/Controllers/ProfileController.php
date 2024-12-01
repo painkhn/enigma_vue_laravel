@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Carbon\Carbon;
+use App\Exports\ReportExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProfileController extends Controller
 {
@@ -33,16 +36,79 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function Admin($name) {
-        $user = User::where('name', $name)->first();
+    public function Admin() {
+        $users = User::all();
+        // $users_limited = User::all()->limit(10);
         $themes = Theme::with('category')->get();
-        // dd($themes);
+    
+        // Получаем новых пользователей за последние 7 дней
+        $newUsers = User::where('created_at', '>=', now()->subDays(7))
+                        ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
+                        ->groupBy('date')
+                        ->get();
+    
         return Inertia::render('AdminPage', [
-            'user' => $user,
+            'users' => $users,
             'themes' => $themes,
+            'newUsers' => $newUsers,
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
         ]);
+    }
+
+    public function banUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_ban = true;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Пользователь забанен.');
+    }
+
+    public function unbanUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_ban = false;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Пользователь разбанен.');
+    }
+
+    public function search(Request $request) {
+        $word = $request->word;
+        $user_search = User::where('name', 'like', "%{$word}%")->orderBy('id')->get();
+        // return $this->index($theme=$theme_search);
+        return response()->json($user_search);
+    }
+
+    public function excel()
+    {
+        $totalUsers = User::count() ?: '0';
+        $usersThisMonth = User::whereMonth('created_at', Carbon::now()->month)->count() ?: '0';
+        $usersThisHalfYear = User::where('created_at', '>=', Carbon::now()->subMonths(6))->count() ?: '0';
+        $usersThisYear = User::where('created_at', '>=', Carbon::now()->subYear())->count() ?: '0';
+
+        $totalThemes = Theme::count() ?: '0';
+        $themesThisMonth = Theme::whereMonth('datetime', Carbon::now()->month)->count() ?: '0';
+        $themesThisHalfYear = Theme::where('datetime', '>=', Carbon::now()->subMonths(6))->count() ?: '0';
+        $themesThisYear = Theme::where('datetime', '>=', Carbon::now()->subYear())->count() ?: '0';
+        $upcomingThemes = Theme::where('datetime', '>', Carbon::now())->count() ?: '0';
+
+        $data = [
+            [' '],
+            ['Всего пользователей', $totalUsers],
+            ['Пользователей за этот месяц', $usersThisMonth],
+            ['Пользователей за полгода', $usersThisHalfYear],
+            ['Пользователей за год', $usersThisYear],
+            [' '],
+            ['Всего записей', $totalThemes],
+            ['Записей за этот месяц', $themesThisMonth],
+            ['Записей за полгода', $themesThisHalfYear],
+            ['Записей за год', $themesThisYear],
+            ['Предстоящих записей', $upcomingThemes],
+        ];
+
+        return Excel::download(new ReportExport($data), 'report.xlsx');
     }
 
     public function updateAvatar(Request $request)
