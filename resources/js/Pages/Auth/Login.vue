@@ -70,26 +70,14 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            
-
-            <div class="mt-4 block">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600 dark:text-white/90"
-                        >Запомнить данные</span
-                    >
-                </label>
-            </div>
-
            
 
             <div class="mt-4 flex items-center justify-end">
                 <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
+                    :href="route('register')"
                     class="rounded-md transition-all text-sm text-red-400 underline hover:text-red-300 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
                 >
-                    Восстановить пароль
+                    Создать аккаунт
                 </Link>
 
                 <PrimaryButton

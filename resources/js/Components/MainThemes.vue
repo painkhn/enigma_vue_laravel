@@ -13,6 +13,8 @@
     const word = ref('')
     const searchResults = ref([]);
 
+    const isThemeVisible = ref(true)
+
     const searchThemes = async () => {
         try {
             const response = await axios.post(route('search'), {
