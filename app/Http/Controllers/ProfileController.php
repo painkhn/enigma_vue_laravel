@@ -39,7 +39,10 @@ class ProfileController extends Controller
     public function Admin() {
         $users = User::all();
         // $users_limited = User::all()->limit(10);
-        $themes = Theme::with('category')->get();
+        $themes = Theme::where('created_at', '>=', now()->subDays(7))
+                        ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
+                        ->groupBy('date')
+                        ->get();
     
         // Получаем новых пользователей за последние 7 дней
         $newUsers = User::where('created_at', '>=', now()->subDays(7))

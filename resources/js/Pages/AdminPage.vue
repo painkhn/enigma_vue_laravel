@@ -22,7 +22,7 @@ const props = defineProps({
         type: Object,
     },
     themes: {
-        type: Object,
+        type: Array,
     },
     newUsers: {
         type: Array,
@@ -81,6 +81,72 @@ const options = {
     ],
     xaxis: {
         categories: props.newUsers.map(user => user.date), // Используем даты
+        labels: {
+            show: false,
+        },
+        axisBorder: {
+            show: false,
+        },
+        axisTicks: {
+            show: false,
+        },
+    },
+    yaxis: {
+        show: false,
+    },
+};
+const options_themes = {
+    chart: {
+        height: "100%",
+        maxWidth: "100%",
+        type: "area",
+        fontFamily: "Inter, sans-serif",
+        dropShadow: {
+            enabled: false,
+        },
+        toolbar: {
+            show: false,
+        },
+    },
+    tooltip: {
+        enabled: true,
+        x: {
+            show: false,
+        },
+    },
+    fill: {
+        type: "gradient",
+        gradient: {
+            opacityFrom: 0.55,
+            opacityTo: 0,
+            shade: "#1C64F2",
+            gradientToColors: ["#1C64F2"],
+        },
+    },
+    dataLabels: {
+        enabled: false,
+    },
+    stroke: {
+        width: 6,
+    },
+    grid: {
+        show: false,
+        strokeDashArray: 4,
+        padding: {
+            left: 2,
+            right: 2,
+            top: 0
+        },
+    },
+    series: [
+        {
+            name: "New users",
+            data: props.themes.map(theme => theme.count), // Используем количество новых пользователей
+            color: "#1A56DB",
+        },
+    ],
+    xaxis: {
+        categories: props.themes.map(theme => theme.date), // Используем даты
         labels: {
             show: false,
         },
@@ -158,6 +224,10 @@ const options = {
             const chart = new ApexCharts(document.getElementById("area-chart"), options);
             chart.render();
         }
+        if (document.getElementById("area-chart-2") && typeof ApexCharts !== 'undefined') {
+            const chart = new ApexCharts(document.getElementById("area-chart-2"), options_themes);
+            chart.render();
+        }
 
         console.log(props.users);
     });
@@ -175,7 +245,7 @@ const options = {
     <div class="max-w-7xl w-full h-auto p-10 rounded-xl border bg-white border-gray-200 dark:border-zinc-900 dark:bg-zinc-700 my-10 mx-auto">
         <div>
             <h2 class="text-white text-xl font-semibold mb-10">Аналитика</h2>
-            <div class="flex mb-10">
+            <div class="flex mb-10 gap-10">
 
                 <!-- diag 2 -->
                 <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
@@ -194,6 +264,43 @@ const options = {
                         </p>
                         <!-- Dropdown menu -->
                         <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                              <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
+                              </li>
+                              <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a>
+                              </li>
+                              <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 7 days</a>
+                              </li>
+                              <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 30 days</a>
+                              </li>
+                              <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 90 days</a>
+                              </li>
+                            </ul>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                    <div class="flex justify-between">
+                      <div>
+                        <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">{{ $page.props.themes.length }}</h5>
+                        <p class="text-base font-normal text-gray-500 dark:text-gray-400">Всего тем</p>
+                      </div>
+                    </div>
+                    <div id="area-chart-2"></div>
+                    <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
+                      <div class="flex justify-between items-center pt-5">
+                        <!-- Button -->
+                        <p class="text-base font-normal text-gray-500 dark:text-gray-400">
+                            За последние 7 дней
+                        </p>
+                        <!-- Dropdown menu -->
+                        <div id="lastDaysdropdown-2" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                               <li>
                                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a>
