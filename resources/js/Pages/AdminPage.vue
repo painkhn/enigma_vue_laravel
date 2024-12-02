@@ -341,7 +341,10 @@ const options_themes = {
             </div>
             <ul class="main__users-list flex flex-col gap-3 w-full" v-if="searchResults.length > 0">
                 <li class="w-full h-auto" v-for="user in searchResults" :key="user.id">
-                    <p class="px-5 py-2 text-red-400 border-2 text-md uppercase border-red-400 transition-all rounded-md font-semibold flex items-center" :href="`/users/${user.name}`">{{ user.name }} 
+                    <p class="px-5 py-2 text-red-400 border-2 text-md uppercase border-red-400 transition-all rounded-md font-semibold flex items-center">
+                        <Link :href="`/users/${user.name}`">
+                            {{ user.name }} 
+                        </Link>
                         <button v-if="user.is_ban == 0" @click="banUser(user.id)" class="ml-auto px-4 py-2 dark:bg-black/20 rounded-md transition-all dark:hover:bg-black/30 bg-black/5 hover:bg-black/10">
                             Забанить
                         </button>
@@ -353,7 +356,10 @@ const options_themes = {
             </ul>
             <ul class="main__users-list flex flex-col gap-3 w-full" v-else>
                 <li class="w-full h-auto" v-for="user in $page.props.users" :key="user.id">
-                    <p class="px-5 py-2 text-red-400 border-2 text-md uppercase border-red-400 transition-all rounded-md font-semibold flex items-center" :href="`/users/${user.name}`">{{ user.name }} 
+                    <p class="px-5 py-2 text-red-400 border-2 text-md uppercase border-red-400 transition-all rounded-md font-semibold flex items-center">
+                        <Link :href="`/users/${user.name}`">
+                            {{ user.name }} 
+                        </Link>
                         <button v-if="user.is_ban == 0" @click="banUser(user.id)" class="ml-auto px-4 py-2 dark:bg-black/20 rounded-md transition-all dark:hover:bg-black/30 bg-black/5 hover:bg-black/10">
                             Забанить
                         </button>
