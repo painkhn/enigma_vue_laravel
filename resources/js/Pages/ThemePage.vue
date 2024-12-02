@@ -6,6 +6,7 @@
     import CommentForm from '@/Components/CommentForm.vue';
     import { Head, Link, usePage } from '@inertiajs/vue3';
     import ComplaintForm from '@/Components/ComplaintForm.vue';
+    import DeleteTheme from '@/Components/DeleteTheme.vue';
 
     const goBack = () => {
         window.history.back();
@@ -139,6 +140,23 @@
         }
     }
 
+    const isDeleteVisible = ref(false)
+    const selectedTheme = ref(null)
+
+    const deleteVisibleChange = (theme) => {
+        selectedTheme.value = theme
+        isDeleteVisible.value = !isDeleteVisible.value
+    }
+
+    const handleDelete = (themeId) => {
+        deleteTheme(themeId)
+        isDeleteVisible.value = false
+    }
+
+    const handleCancel = () => {
+        isDeleteVisible.value = false
+    }
+
     onMounted(() => {
         console.log('Рез:', props.theme.id);
 
@@ -230,9 +248,15 @@
                     </form>
                 </li>
                 <li>
-                    <button v-if="$page.props.auth.user.is_admin == 1 ||$page.props.auth.user.id == $page.props.theme.user.id " @click="deleteTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
+                    <button v-if="$page.props.auth.user.is_admin == 1 ||$page.props.auth.user.id == $page.props.theme.user.id " @click="deleteVisibleChange(theme)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
                         Удалить тему
                     </button>
+                    <DeleteTheme
+                        :theme="selectedTheme" 
+                        v-if="isDeleteVisible" 
+                        @delete="handleDelete" 
+                        @cancel="handleCancel" 
+                    />
                 </li>
                 <li>
                     <button @click="downloadTheme($page.props.theme.id)" class="px-5 py-2 bg-red-400 rounded-md text-white font-semibold transition-all hover:bg-red-300">
